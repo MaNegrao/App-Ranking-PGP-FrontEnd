@@ -6,7 +6,7 @@ CREATE TABLE player (
     pic bytea,
     password varchar(43),
     nick varchar(50),
-    Id INTEGER PRIMARY KEY,
+    Id SERIAL PRIMARY KEY,
     wins INTEGER,
     UNIQUE (nick, Id)
 );
@@ -14,12 +14,12 @@ CREATE TABLE player (
 CREATE TABLE match (
     date DATE,
     status CHAR,
-    id INTEGER PRIMARY KEY
+    id SERIAL PRIMARY KEY
 );
 
 CREATE TABLE team (
     score INTEGER,
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     win INTEGER,
     fk_match_id INTEGER
 );
