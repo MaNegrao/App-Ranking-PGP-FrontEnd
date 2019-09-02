@@ -1,9 +1,9 @@
-/* Lógico_1: */
+/* Lï¿½gico_1: */
 
-CREATE TABLE user (
+CREATE TABLE player (
     name varchar(100),
     email varchar(250),
-    pic BLOB,
+    pic bytea,
     password varchar(43),
     nick varchar(50),
     Id INTEGER PRIMARY KEY,
@@ -25,7 +25,7 @@ CREATE TABLE team (
 );
 
 CREATE TABLE plays (
-    fk_user_Id INTEGER,
+    fk_player_Id INTEGER,
     fk_team_id INTEGER
 );
  
@@ -35,8 +35,8 @@ ALTER TABLE team ADD CONSTRAINT FK_team_2
     ON DELETE RESTRICT;
  
 ALTER TABLE plays ADD CONSTRAINT FK_plays_1
-    FOREIGN KEY (fk_user_nick???, fk_user_Id???)
-    REFERENCES user (???, ???)
+    FOREIGN KEY (fk_player_Id)
+    REFERENCES player (id)
     ON DELETE RESTRICT;
  
 ALTER TABLE plays ADD CONSTRAINT FK_plays_2
