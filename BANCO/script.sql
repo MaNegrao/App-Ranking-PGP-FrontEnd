@@ -11,6 +11,7 @@ CREATE TABLE player (
     UNIQUE (nick, Id)
 );
 
+
 CREATE TABLE match (
     date DATE NOT NULL,
     status CHAR NOT NULL,
