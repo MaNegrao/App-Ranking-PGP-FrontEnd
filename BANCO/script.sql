@@ -6,7 +6,7 @@ CREATE TABLE player (
     pic bytea,
     password varchar(43),
     nick varchar(50),
-    id SERIAL PRIMARY KEY,
+    Id SERIAL PRIMARY KEY,
     wins INTEGER,
     UNIQUE (nick, Id)
 );
