@@ -1,19 +1,19 @@
 /* L�gico_1: */
 
 CREATE TABLE player (
-    name varchar(100),
-    email varchar(250),
+    name varchar(100) NOT NULL,
+    email varchar(250) NOT NULL,
     pic bytea,
-    password varchar(43),
-    nick varchar(50),
-    Id SERIAL PRIMARY KEY,
-    wins INTEGER,
+    password varchar(43) NOT NULL,
+    nick varchar(50) NOT NULL,
+    id SERIAL PRIMARY KEY,
+    wins INTEGER NOT NULL,
     UNIQUE (nick, Id)
 );
 
 CREATE TABLE match (
-    date DATE,
-    status CHAR,
+    date DATE NOT NULL,
+    status CHAR NOT NULL,
     id SERIAL PRIMARY KEY
 );
 
