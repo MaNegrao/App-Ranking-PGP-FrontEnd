@@ -6,8 +6,8 @@ import { withFormik } from 'formik';
 const Form = (props) => (
   <View >
     <TextInput
-      value={props.values.email}
-      onChangeText={text => props.setFieldValue('email', text)}
+      value={props.values.nick}
+      onChangeText={text => props.setFieldValue('nick', text)}
     />
 
     <TextInput
@@ -23,7 +23,7 @@ const Form = (props) => (
 );
 
 export default withFormik({
-  mapPropsToValues: () => ({ email: '', password: '' }),
+  mapPropsToValues: () => ({ nick: '', password: '' }),
 
   handleSubmit: (values) => {
     console.log(values);
