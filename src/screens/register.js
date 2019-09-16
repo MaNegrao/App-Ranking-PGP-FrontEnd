@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TextInput, Button } from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 
 import { withFormik } from 'formik';
 
@@ -51,13 +52,14 @@ const Form = (props) => (
 
         <Text>Já tenho uma conta:</Text>
         <Button
-        
+            onPress=""
             title="Login"
         />
     </View>
 )
 
 export default withFormik({
+    
     mapPropsToValues: () => ({ email: '', checkEmail: '', name: '', nickname: '', password: '' , checkPassword: ''}),
   
     handleSubmit: (values) => {
