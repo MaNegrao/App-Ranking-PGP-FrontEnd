@@ -5,6 +5,12 @@ import { withFormik } from 'formik';
 
 const Form = (props) => (
     <View>
+
+        <Text style={styles.text}>Bem Vindo, Registre-se</Text>
+        <Image source={
+          require('../assets/images/icon.png')
+        }/>
+        
         <TextInput
             value={props.values.email}
             onChangeText={text => props.setFieldValue('email', text)}
@@ -41,6 +47,12 @@ const Form = (props) => (
         <Button
             onPress={props.handleSubmit}
             title="Register"
+        />
+
+        <Text>Já tenho uma conta:</Text>
+        <Button
+        
+            title="Login"
         />
     </View>
 )
