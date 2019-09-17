@@ -9,3 +9,5 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
+v8-compile-cache-0/*
+metro-cache/*
