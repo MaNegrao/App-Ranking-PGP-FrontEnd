@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TextInput, Button, Text, StyleSheet, Image } from 'react-native';
+import ImagePicker from "../components/imagePicker";
 
 import { withFormik } from 'formik';
 
@@ -49,6 +50,8 @@ const registerForm = (props) => (
             onChangeText={text => props.setFieldValue('checkPassword', text)}
             autoCompleteType={'password'}
         />
+
+		<ImagePicker/>
 
         <Button
             onPress={props.handleSubmit}
