@@ -1,54 +1,63 @@
-import React from 'react';
+import api from '../services/api'
+import React, {Component} from 'react';
 import { View, TextInput, Button, StyleSheet, Text, Image} from 'react-native';
 import { withFormik } from 'formik';
 
-const loginForm = (props) => (
-  <View style={styles.container}>
-
-    <Image source={
-      require('../assets/images/icon.png')
-    }/>
-
-	<TextInput 
-		style = {styles.input}
-		value={props.values.nickname}
-		onChangeText={text => props.setFieldValue('nickname', text)} 
-		returnKeyType="next" 
-		placeholder='Nickname' 
-    />
-
-    <TextInput 
-		style = {styles.input}   
-		returnKeyType="go" 
-		value={props.values.password}
-		onChangeText={text => props.setFieldValue('password', text)}
-		autoCompleteType={'password'}
-		placeholder='Senha'             
-		secureTextEntry
-    />
-
-    <Button
-		onPress={props.handleSubmit}
-		title="Login"
-    />
-
-    <Text>Não tem uma conta?</Text>
-    
-    <Button
-		onPress={ () => props.navigation.navigate('Register')}
-		title="Cadastre-se"
-    />
-  </View>
-);
-
-export default withFormik({
-	mapPropsToValues: () => ({ nickname: '', password: '' }),
-
-	handleSubmit: (values) => {
-		console.log(values);
+export default class Login extends Component {
+	constructor() {
+        super();
+        this.state = {
+            nick: '',
+            password: '',
+        }
+	}
+	
+	loginSubmit = () => {
+        const response = api.get('/players/:nickname', this.state.nick)
+    	console.log(response)
 	}
 
-})(loginForm);
+	render () {
+		return(
+			<View style={styles.container}>
+				<Image source={
+				require('../assets/images/icon.png')
+				}/>
+
+				<TextInput 
+					style = {styles.input}
+                    value={this.state.nick}
+                    onChangeText={(nick) => this.setState({nick})}
+					returnKeyType="next" 
+					placeholder='Nickname' 
+				/>
+
+				<TextInput 
+					style = {styles.input}   
+					returnKeyType="go" 
+                    value={this.state.password}
+                    onChangeText={(password) => this.setState({password})}
+					autoCompleteType={'password'}
+					placeholder='Senha'             
+					secureTextEntry
+				/>
+
+				<Button
+					onPress={this.loginSubmit}
+					title="Login"
+				/>
+
+				<Text>Não tem uma conta?</Text>
+				
+				<Button
+					onPress={ () => this.props.navigation.navigate('Register')}
+					title="Cadastre-se"
+				/>
+			</View>
+		)
+	}
+	
+}
 
 const styles = StyleSheet.create({
 	container: {
