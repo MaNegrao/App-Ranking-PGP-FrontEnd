@@ -1,81 +1,118 @@
-import React from 'react';
+import React, {Component} from 'react';
+import api from '../services/api'
 import { View, TextInput, Button, Text, StyleSheet, Image } from 'react-native';
 import ImagePicker from "../components/imagePicker";
 
-import { withFormik } from 'formik';
 
-const registerForm = (props) => (
-    <View>
-        <Text style={styles.text}>Bem Vindo, Registre-se</Text>
-        
-		<Image source={
-          require('../assets/images/icon.png')
-        }/>
-        
-        <TextInput
-            style = {styles.input} 
-            value={props.values.email}
-            onChangeText={text => props.setFieldValue('email', text)}
-        />
-
-        <TextInput
-            style = {styles.input} 
-            value={props.values.checkEmail}
-            onChangeText={text => props.setFieldValue('checkEmail', text)}
-        />
-
-        <TextInput
-            style = {styles.input} 
-            value={props.values.name}
-            onChangeText={text => props.setFieldValue('name', text)}
-        />
-
-        <TextInput
-            style = {styles.input} 
-            value={props.values.nickname}
-            onChangeText={text => props.setFieldValue('nickname', text)}
-            autoCompleteType={'password'}
-        />
-
-        <TextInput
-            style = {styles.input} 
-            value={props.values.password}
-            onChangeText={text => props.setFieldValue('password', text)}
-            autoCompleteType={'password'}
-        />
-
-        <TextInput
-            style = {styles.input} 
-            value={props.values.checkPassword}
-            onChangeText={text => props.setFieldValue('checkPassword', text)}
-            autoCompleteType={'password'}
-        />
-
-		<ImagePicker/>
-
-        <Button
-            onPress={props.handleSubmit}
-            title="Register"
-        />
-
-        <Text>Já tenho uma conta:</Text>
-
-        <Button
-            onPress={ () => props.navigation.navigate('Login')}
-            title="Login"
-        />
-    </View>
-)
-
-export default withFormik({
-    
-    mapPropsToValues: () => ({ email: '', checkEmail: '', name: '', nickname: '', password: '' , checkPassword: ''}),
-  
-    handleSubmit: (values) => {
-      console.log(values);
+export default class Register extends Component {
+    constructor() {
+        super();
+        this.state = {
+            name: '',
+            nick: '',
+            email: '',
+            // checkEmail: '',
+            password: '',
+            // checkPassword: '',
+            pic: '',
+            wins: 0,
+        }
     }
-  })(registerForm );
 
+    validateEmail = (email, checkEmail) => {
+        const regex = /^[a-z._-]+@[a-z.-]+\.[a-z]{2,4}$/;
+
+        if (email == "" || checkEmail == "" || checkEmail != email){
+            return false
+        } else {
+            return regex.test(email)
+        }
+    }
+
+    registerSubmit = () => {
+        const response = api.post('/players', this.state)
+        const resposta = api.get('/players')
+        console.log(response)
+    }
+
+    render () {
+        return(
+            <View>
+                <Text style={styles.text}>Bem Vindo, Registre-se</Text>
+                
+                <Image source={
+                require('../assets/images/icon.png')
+                }/>
+                
+                <TextInput
+                    style = {styles.input} 
+                    placeholder={'Nome'}
+                    value={this.state.name}
+                    onChangeText={(name) => this.setState({name})}
+                    autoCompleteType={'name'}
+                />
+        
+                <TextInput
+                    style = {styles.input} 
+                    placeholder={'Nickname'}
+                    value={this.state.nick}
+                    onChangeText={(nick) => this.setState({nick})}
+                />
+        
+                <TextInput
+                    style = {styles.input} 
+                    placeholder={'E-mail'}
+					value={this.state.email}
+                    onChangeText={(email) => this.setState({email})}
+                    autoCompleteType={'email'}
+                    keyboardType={'email-address'}
+                />
+        
+                {/* <TextInput
+                    style = {styles.input} 
+                    placeholder={'Confirme o E-mail'}
+                    value={this.state.checkEmail}
+                    onChangeText={(checkEmail) => this.setState({checkEmail})}
+                    autoCompleteType={'email'}
+                    keyboardType={'email-address'}
+                /> */}
+        
+                <TextInput
+                    style = {styles.input} 
+                    placeholder={'Senha'}
+                    value={this.state.password}
+                    onChangeText={(password) => this.setState({password})}
+                    autoCompleteType={'password'}
+					secureTextEntry
+                    />
+        
+                {/* <TextInput
+                    style = {styles.input} 
+                    placeholder={'Confirme a Senha'}
+                    value={this.state.checkPassword}
+                    onChangeText={(checkPassword) => this.setState({checkPassword})}
+                    autoCompleteType={'password'}
+                /> */}
+        
+                <ImagePicker style = {styles.input}/>
+        
+                <Button
+                    onPress={this.registerSubmit.bind(this)}
+                    title="Register"
+                />
+        
+                <Text>Já tenho uma conta:</Text>
+        
+                <Button
+                    onPress={ () => this.props.navigation.navigate('Login')}
+                    title="Login"
+                />
+            </View>
+        )
+
+    }
+
+}
 
 const styles = StyleSheet.create({
 
@@ -90,7 +127,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 		fontSize: 10,
 		borderRadius: 0,
-		borderWidth: 2,
+		borderBottomWidth: 2,
 		borderColor: 'black',
     }
 })
