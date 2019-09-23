@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import api from '../services/api'
 import { View, TextInput, Button, Text, StyleSheet, Image } from 'react-native';
 import ImagePicker from "../components/imagePicker";
-
+const md5 = require('md5')
 
 export default class Register extends Component {
     constructor() {
@@ -11,28 +11,50 @@ export default class Register extends Component {
             name: '',
             nick: '',
             email: '',
-            // checkEmail: '',
             password: '',
-            // checkPassword: '',
+            checkPassword: '',
             pic: '',
             wins: 0,
         }
     }
 
-    validateEmail = (email, checkEmail) => {
-        const regex = /^[a-z._-]+@[a-z.-]+\.[a-z]{2,4}$/;
+    validate = (name, nick, email, password, checkPassword, pic) => {
+        const regex = /^[a-zA-Z0-9._-]+@([a-z0-9]+)(\.[a-z]{2,3})+$/;
 
-        if (email == "" || checkEmail == "" || checkEmail != email){
+        if (name == ""){
+            alert("Por favor, insira seu nome")
             return false
-        } else {
-            return regex.test(email)
-        }
+        } else if (nick == ""){
+            alert("Por favor, insira seu nickname")
+            return false
+        } else if (email == ""){
+            alert("Por favor, insira seu email")
+            return false
+        } else if (regex.test(email) == false){
+            alert("Por favor, insira um email válido")
+            return false
+        } else if (password == ""){
+            alert("Por favor, insira uma senha")
+            return false
+        } else if (password != checkPassword){
+            alert("As senhas devem ser iguais")
+            return false
+        } else if (password.length < 8){
+            alert("A senha deve ter no mínimo 8 digitos")
+            return false
+        } else 
+            return true
     }
 
     registerSubmit = () => {
-        const response = api.post('/players', this.state)
-        const resposta = api.get('/players')
-        console.log(response)
+        const ts = this.state
+        if (this.validate(ts.name, ts.nick, ts.email, ts.password, ts.checkPassword, ts.pic) == false)
+            console.log("Erro")
+        else{
+            const response = api.post('/players', this.state)
+            const resposta = api.get('/players')
+            console.log(response)
+        }
     }
 
     render () {
@@ -67,32 +89,24 @@ export default class Register extends Component {
                     autoCompleteType={'email'}
                     keyboardType={'email-address'}
                 />
-        
-                {/* <TextInput
-                    style = {styles.input} 
-                    placeholder={'Confirme o E-mail'}
-                    value={this.state.checkEmail}
-                    onChangeText={(checkEmail) => this.setState({checkEmail})}
-                    autoCompleteType={'email'}
-                    keyboardType={'email-address'}
-                /> */}
-        
+
                 <TextInput
                     style = {styles.input} 
                     placeholder={'Senha'}
                     value={this.state.password}
-                    onChangeText={(password) => this.setState({password})}
+                    onChangeText={(password) => this.setState({md5(password)})}
                     autoCompleteType={'password'}
 					secureTextEntry
                     />
         
-                {/* <TextInput
+                <TextInput
                     style = {styles.input} 
                     placeholder={'Confirme a Senha'}
                     value={this.state.checkPassword}
-                    onChangeText={(checkPassword) => this.setState({checkPassword})}
+                    onChangeText={(checkPassword) => this.setState({md5(checkPassword)})}
                     autoCompleteType={'password'}
-                /> */}
+                    secureTextEntry
+                />
         
                 <ImagePicker style = {styles.input}/>
         
