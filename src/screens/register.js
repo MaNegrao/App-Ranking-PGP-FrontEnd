@@ -13,28 +13,50 @@ export default class Register extends Component {
             name: '',
             nick: '',
             email: '',
-            // checkEmail: '',
             password: '',
-            // checkPassword: '',
+            checkPassword: '',
             pic: '',
             wins: 0,
         }
     }
 
-    validateEmail = (email, checkEmail) => {
-        const regex = /^[a-z._-]+@[a-z.-]+\.[a-z]{2,4}$/;
+    validate = (name, nick, email, password, checkPassword) => {
+        const regex = /^[a-zA-Z0-9._-]+@([a-z0-9]+)(\.[a-z]{2,3})+$/;
 
-        if (email == "" || checkEmail == "" || checkEmail != email){
+        if (name == ""){
+            alert("Por favor, insira seu nome")
             return false
-        } else {
-            return regex.test(email)
-        }
+        } else if (nick == ""){
+            alert("Por favor, insira seu nickname")
+            return false
+        } else if (email == ""){
+            alert("Por favor, insira seu email")
+            return false
+        } else if (regex.test(email) == false){
+            alert("Por favor, insira um email válido")
+            return false
+        } else if (password == ""){
+            alert("Por favor, insira uma senha")
+            return false
+        } else if (password != checkPassword){
+            alert("As senhas devem ser iguais")
+            return false
+        } else if (password.length < 8){
+            alert("A senha deve ter no mínimo 8 digitos")
+            return false
+        } else 
+            return true
     }
 
     registerSubmit = () => {
-        const response = api.post('/players', this.state)
-        const resposta = api.get('/players')
-        console.log(response)
+        const ts = this.state
+        if (this.validate(ts.name, ts.nick, ts.email, ts.password, ts.checkPassword) == false)
+            console.log("Erro")
+        else{
+            const response = api.post('/players', this.state)
+            const resposta = api.get('/players')
+            console.log(response)
+        }
     }
 
     render () {
@@ -54,6 +76,7 @@ export default class Register extends Component {
                             autoCompleteType={'name'}
                         />
                     </View>
+<<<<<<< HEAD
 
                     <View>
                         <TextInput
@@ -94,14 +117,50 @@ export default class Register extends Component {
                             secureTextEntry
                             />
                     </View>
+=======
+                    
+                    <TextInput
+                        style = {styles.input} 
+                        placeholder={'Nome'}
+                        value={this.state.name}
+                        onChangeText={(name) => this.setState({name})}
+                        autoCompleteType={'name'}
+                    />
             
-                    {/* <TextInput
+                    <TextInput
+                        style = {styles.input} 
+                        placeholder={'Nickname'}
+                        value={this.state.nick}
+                        onChangeText={(nick) => this.setState({nick})}
+                    />
+            
+                    <TextInput
+                        style = {styles.input} 
+                        placeholder={'E-mail'}
+                        value={this.state.email}
+                        onChangeText={(email) => this.setState({email})}
+                        autoCompleteType={'email'}
+                        keyboardType={'email-address'}
+                    />
+
+                    <TextInput
+                        style = {styles.input} 
+                        placeholder={'Senha'}
+                        value={this.state.password}
+                        onChangeText={(password) => this.setState({password})}
+                        autoCompleteType={'password'}
+                        secureTextEntry
+                    />
+>>>>>>> 9877b734b220170b4312ee20cec529ac20cdce6e
+            
+                    <TextInput
                         style = {styles.input} 
                         placeholder={'Confirme a Senha'}
                         value={this.state.checkPassword}
                         onChangeText={(checkPassword) => this.setState({checkPassword})}
                         autoCompleteType={'password'}
-                    /> */}
+                        secureTextEntry
+                    />
             
                     <ImagePicker style = {styles.button}/>
                    
