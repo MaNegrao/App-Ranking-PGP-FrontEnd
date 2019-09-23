@@ -15,7 +15,7 @@ export default class ImagePickerExample extends React.Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Button
-          title="Pick an image from camera roll"
+          title="Imagem de Perfil"
           onPress={this._pickImage}
         />
         {image &&

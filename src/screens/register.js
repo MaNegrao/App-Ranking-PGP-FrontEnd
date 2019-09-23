@@ -63,23 +63,13 @@ export default class Register extends Component {
         return(
 			<SafeAreaView  style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.title}>Bem Vindo, Registre-se</Text>
                     <Image source={require('../assets/images/icon.png')}/>
+                    <Text style={styles.title}>Bem Vindo, Registre-se</Text>
                 </View>
                 <View>  
                     <View>
                         <TextInput
                             style = {styles.input}
-                            placeholder={'Nome'}
-                            value={this.state.name}
-                            onChangeText={(name) => this.setState({name})}
-                            autoCompleteType={'name'}
-                        />
-                    </View>
-                    
-                    <View>
-                        <TextInput
-                            style = {styles.input} 
                             placeholder={'Nome'}
                             value={this.state.name}
                             onChangeText={(name) => this.setState({name})}
@@ -129,31 +119,26 @@ export default class Register extends Component {
                         />
                     </View>
             
-                    <ImagePicker style = {styles.button}/>
+                    {/* <ImagePicker style = {styles.button}/> */}
                    
                     <View>
                         <TouchableOpacity
                                 title="Register"
                                 style={styles.button}
                                 onPress={this.registerSubmit.bind(this)}>
-                                <Text style={styles.buttonText} >Resgister</Text>
+                                <Text style={styles.buttonText} >CADASTRAR</Text>
                         </TouchableOpacity>
                     </View>
 
-                    <View>
+                    <View style={styles.footer}>
+                        <Text style={styles.textLogin}>Já tenho uma conta:</Text>
+
                         <TouchableOpacity
                             onPress={ () => this.props.navigation.navigate('Login')}
-                            style={styles.button2} title = "Entrar"
+                            style={styles.loginButton} title = "Entrar"
                         >
-                        <Text style = {styles.text2}>Entrar</Text></TouchableOpacity>
+                        <Text style = {styles.textButtonLogin}>Entrar</Text></TouchableOpacity>
                     </View>
-
-                    <Text style={styles.buttonText}>Já tenho uma conta:</Text>
-            
-                    <Button
-                        onPress={ () => this.props.navigation.navigate('Login')}
-                        title="Login"
-                    />
                 </View>
             </SafeAreaView>
         )
@@ -166,35 +151,36 @@ const styles = StyleSheet.create({
 
     container: {
 		flex: 1,
-		justifyContent: 'center',
 		alignItems: 'center',
-		padding: 10
     },
 
     header: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
     },
 
+    footer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
+
+
     title: { 
-        width:200,
-		height:80,
         fontSize: 30,
     },
 
     button:{
 		backgroundColor:'black',
-		paddingVertical:15,
-		margin:10
+		paddingVertical:12,
+		marginTop: 20
 	},
 
     input: {
 		fontSize:20,
-		marginTop:10,
-		width:300,
+		width:350,
 		height:80,
-		padding: 10,
 		borderRadius: 0,
 		borderBottomWidth: 2,
 		borderColor: 'black',
@@ -204,5 +190,22 @@ const styles = StyleSheet.create({
         fontSize:20,
 		color: 'white',
 		textAlign:'center'
+    },
+    
+    textButtonLogin:{
+		color: 'black',
+		fontWeight:'bold',
+		textAlign:'center',
+		fontSize: 20
+    },
+
+    loginButton:{
+		backgroundColor:'white',
+		alignSelf:'flex-end'
+	},
+    
+	textLogin:{
+		color: 'black',
+		fontSize: 16
 	}
 })
