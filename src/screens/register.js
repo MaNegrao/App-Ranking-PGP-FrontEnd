@@ -77,47 +77,57 @@ export default class Register extends Component {
                         />
                     </View>
                     
-                    <TextInput
-                        style = {styles.input} 
-                        placeholder={'Nome'}
-                        value={this.state.name}
-                        onChangeText={(name) => this.setState({name})}
-                        autoCompleteType={'name'}
-                    />
-            
-                    <TextInput
-                        style = {styles.input} 
-                        placeholder={'Nickname'}
-                        value={this.state.nick}
-                        onChangeText={(nick) => this.setState({nick})}
-                    />
-            
-                    <TextInput
-                        style = {styles.input} 
-                        placeholder={'E-mail'}
-                        value={this.state.email}
-                        onChangeText={(email) => this.setState({email})}
-                        autoCompleteType={'email'}
-                        keyboardType={'email-address'}
-                    />
+                    <View>
+                        <TextInput
+                            style = {styles.input} 
+                            placeholder={'Nome'}
+                            value={this.state.name}
+                            onChangeText={(name) => this.setState({name})}
+                            autoCompleteType={'name'}
+                        />
+                    </View>
 
-                    <TextInput
-                        style = {styles.input} 
-                        placeholder={'Senha'}
-                        value={this.state.password}
-                        onChangeText={(password) => this.setState({password})}
-                        autoCompleteType={'password'}
-                        secureTextEntry
-                    />
-            
-                    <TextInput
-                        style = {styles.input} 
-                        placeholder={'Confirme a Senha'}
-                        value={this.state.checkPassword}
-                        onChangeText={(checkPassword) => this.setState({checkPassword})}
-                        autoCompleteType={'password'}
-                        secureTextEntry
-                    />
+                    <View>
+                        <TextInput
+                            style = {styles.input} 
+                            placeholder={'Nickname'}
+                            value={this.state.nick}
+                            onChangeText={(nick) => this.setState({nick})}
+                        />
+                    </View>
+
+                    <View>
+                        <TextInput
+                            style = {styles.input} 
+                            placeholder={'E-mail'}
+                            value={this.state.email}
+                            onChangeText={(email) => this.setState({email})}
+                            autoCompleteType={'email'}
+                            keyboardType={'email-address'}
+                        />
+                    </View>
+
+                    <View>
+                        <TextInput
+                            style = {styles.input} 
+                            placeholder={'Senha'}
+                            value={this.state.password}
+                            onChangeText={(password) => this.setState({password})}
+                            autoCompleteType={'password'}
+                            secureTextEntry
+                        />
+                    </View>
+
+                    <View>
+                        <TextInput
+                            style = {styles.input} 
+                            placeholder={'Confirme a Senha'}
+                            value={this.state.checkPassword}
+                            onChangeText={(checkPassword) => this.setState({checkPassword})}
+                            autoCompleteType={'password'}
+                            secureTextEntry
+                        />
+                    </View>
             
                     <ImagePicker style = {styles.button}/>
                    
@@ -129,6 +139,15 @@ export default class Register extends Component {
                                 <Text style={styles.buttonText} >Resgister</Text>
                         </TouchableOpacity>
                     </View>
+
+                    <View>
+                        <TouchableOpacity
+                            onPress={ () => this.props.navigation.navigate('Login')}
+                            style={styles.button2} title = "Entrar"
+                        >
+                        <Text style = {styles.text2}>Entrar</Text></TouchableOpacity>
+                    </View>
+
                     <Text style={styles.buttonText}>Já tenho uma conta:</Text>
             
                     <Button
