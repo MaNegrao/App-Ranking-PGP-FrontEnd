@@ -137,7 +137,7 @@ export default class Register extends Component {
                             onPress={ () => this.props.navigation.navigate('Login')}
                             style={styles.loginButton} title = "Entrar"
                         >
-                        <Text style = {styles.textButtonLogin}>Entrar</Text></TouchableOpacity>
+                        <Text style = {styles.textButtonLogin}>ENTRAR</Text></TouchableOpacity>
                     </View>
                 </View>
             </SafeAreaView>
@@ -155,6 +155,7 @@ const styles = StyleSheet.create({
     },
 
     header: {
+        marginTop: 30,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',

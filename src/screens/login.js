@@ -53,13 +53,13 @@ export default class Login extends Component {
 						</TouchableOpacity>
 					</View>
 					
-					<View>
-						<Text>Não tem uma conta?</Text>
+					<View style={styles.footer}> 
+						<Text style={styles.textRegister}>Não tem uma conta? </Text>
 						
 						<TouchableOpacity
 							onPress={ () => this.props.navigation.navigate('Register')}
-							style={styles.button} title = "Cadastrar-se"
-						><Text style = {styles.text}>CADASTRAR-SE</Text></TouchableOpacity>
+							style={styles.registerButton} title = "Cadastrar-se"
+						><Text style = {styles.textButtonRegister}>CADASTRAR-SE</Text></TouchableOpacity>
 					</View>
 				</View>
 			</View>
@@ -70,14 +70,12 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
 	logo:{
-		width:250,
-		height:250,
 		margin:5
 	},
 	input: {
 		fontSize:20,
 		marginTop:10,
-		width:300,
+		width:350,
 		height:80,
 		padding: 10,
 		borderRadius: 0,
@@ -85,20 +83,43 @@ const styles = StyleSheet.create({
 		borderColor: 'black',
 	},
 	container: {
-		marginTop:20,
+		margin:30,
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		padding: 10
 	},
 	button:{
 		backgroundColor:'black',
-		paddingVertical:15,
-		margin:20
+		paddingVertical:12,
+		marginTop:20
 	},
 	text:{
+		fontSize: 20,
 		color: 'white',
 		textAlign:'center'
-	}
+	},
+
+	footer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
 	
+	textButtonRegister:{
+		color: 'black',
+		fontWeight:'bold',
+		textAlign:'center',
+		fontSize: 20
+    },
+
+    registerButton:{
+		backgroundColor:'white',
+		alignSelf:'flex-end'
+	},
+    
+	textRegister:{
+		color: 'black',
+		fontSize: 16
+	}
+
 })
