@@ -54,12 +54,15 @@ export default class Login extends Component {
 					</View>
 					
 					<View>
-						<Text style={styles.text3}>Não tem uma conta?</Text>
+
 						
+						
+						<Text style={styles.text3}>Não tem uma conta?</Text>
 						<TouchableOpacity
 							onPress={ () => this.props.navigation.navigate('Register')}
 							style={styles.button2} title = "Cadastrar-se"
 						><Text style = {styles.text2}>CADASTRAR-SE</Text></TouchableOpacity>
+
 					</View>
 				</View>
 			</View>
@@ -72,7 +75,7 @@ const styles = StyleSheet.create({
 	logo:{
 		width:250,
 		height:250,
-		margin:5
+		marginBottom:10
 	},
 	input: {
 		fontSize:20,
@@ -85,12 +88,12 @@ const styles = StyleSheet.create({
 		borderColor: 'black',
 	},
 	container: {
-		marginTop:20,
-		marginVertical:10,
+		marginTop:10,
+		marginVertical:5,
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		padding: 10
+		padding: 5
 	},
 	button:{
 		backgroundColor:'black',
@@ -101,7 +104,10 @@ const styles = StyleSheet.create({
 	},
 	button2:{
 		backgroundColor:'white',
-		alignSelf:'flex-end'
+	},
+	bot:{
+		flexDirection: 'row',
+		marginTop:20
 	},
 	text:{
 		color: 'white',
@@ -116,7 +122,8 @@ const styles = StyleSheet.create({
 	},
 	text3:{
 		color: 'black',
-		fontSize: 16
+		fontSize: 20,
+		textAlign:'center'
 	}
 
 	
