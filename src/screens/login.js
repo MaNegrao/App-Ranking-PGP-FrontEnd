@@ -54,15 +54,12 @@ export default class Login extends Component {
 					</View>
 					
 					<View>
-
+						<Text>Não tem uma conta?</Text>
 						
-						
-						<Text style={styles.text3}>Não tem uma conta?</Text>
 						<TouchableOpacity
 							onPress={ () => this.props.navigation.navigate('Register')}
-							style={styles.button2} title = "Cadastrar-se"
-						><Text style = {styles.text2}>CADASTRAR-SE</Text></TouchableOpacity>
-
+							style={styles.button} title = "Cadastrar-se"
+						><Text style = {styles.text}>CADASTRAR-SE</Text></TouchableOpacity>
 					</View>
 				</View>
 			</View>
@@ -75,7 +72,7 @@ const styles = StyleSheet.create({
 	logo:{
 		width:250,
 		height:250,
-		marginBottom:10
+		margin:5
 	},
 	input: {
 		fontSize:20,
@@ -88,43 +85,20 @@ const styles = StyleSheet.create({
 		borderColor: 'black',
 	},
 	container: {
-		marginTop:10,
-		marginVertical:5,
+		marginTop:20,
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		padding: 5
+		padding: 10
 	},
 	button:{
 		backgroundColor:'black',
-		paddingVertical:20,
-		paddingHorizontal:10,
-		marginTop:60,
-		marginBottom:20
-	},
-	button2:{
-		backgroundColor:'white',
-	},
-	bot:{
-		flexDirection: 'row',
-		marginTop:20
+		paddingVertical:15,
+		margin:20
 	},
 	text:{
 		color: 'white',
-		textAlign:'center',
-		fontSize: 20
-	},
-	text2:{
-		color: 'black',
-		fontWeight:'bold',
-		textAlign:'center',
-		fontSize: 20
-	},
-	text3:{
-		color: 'black',
-		fontSize: 20,
 		textAlign:'center'
 	}
-
 	
 })

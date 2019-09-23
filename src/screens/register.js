@@ -166,9 +166,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
 
-
     title: { 
-        fontSize: 30,
+        fontSize: 20,
     },
 
     button:{
