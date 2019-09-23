@@ -76,48 +76,6 @@ export default class Register extends Component {
                             autoCompleteType={'name'}
                         />
                     </View>
-<<<<<<< HEAD
-
-                    <View>
-                        <TextInput
-                            style = {styles.input} 
-                            placeholder={'Nickname'}
-                            value={this.state.nick}
-                            onChangeText={(nick) => this.setState({nick})}
-                        />
-                    </View>
-
-                    <View>
-                        <TextInput
-                            style = {styles.input} 
-                            placeholder={'E-mail'}
-                            value={this.state.email}
-                            onChangeText={(email) => this.setState({email})}
-                            autoCompleteType={'email'}
-                            keyboardType={'email-address'}
-                        />
-                    </View>            
-
-                    {/* <TextInput
-                        style = {styles.input} 
-                        placeholder={'Confirme o E-mail'}
-                        value={this.state.checkEmail}
-                        onChangeText={(checkEmail) => this.setState({checkEmail})}
-                        autoCompleteType={'email'}
-                        keyboardType={'email-address'}
-                    /> */}
-            
-                    <View>
-                        <TextInput
-                            style = {styles.input} 
-                            placeholder={'Senha'}
-                            value={this.state.password}
-                            onChangeText={(password) => this.setState({password})}
-                            autoCompleteType={'password'}
-                            secureTextEntry
-                            />
-                    </View>
-=======
                     
                     <TextInput
                         style = {styles.input} 
@@ -151,7 +109,6 @@ export default class Register extends Component {
                         autoCompleteType={'password'}
                         secureTextEntry
                     />
->>>>>>> 9877b734b220170b4312ee20cec529ac20cdce6e
             
                     <TextInput
                         style = {styles.input} 
