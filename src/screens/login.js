@@ -1,6 +1,7 @@
 import api from '../services/api'
 import React, {Component} from 'react';
 import { View, TextInput, Button, StyleSheet, Text, Image, StatusBar} from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { withFormik } from 'formik';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -87,6 +88,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
+		height: hp('80%'), 
+        width: wp('90%')
 	},
 	button:{
 		backgroundColor:'black',

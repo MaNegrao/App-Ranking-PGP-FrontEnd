@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import api from '../services/api';
-import { Icon } from 'react-native-elements';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { View, TextInput, Button, Text, StyleSheet, Image } from 'react-native';
 import ImagePicker from "../components/imagePicker";
 import SafeAreaView from 'react-native-safe-area-view';
@@ -62,82 +62,84 @@ export default class Register extends Component {
     render () {
         return(
 			<SafeAreaView  style={styles.container}>
-                <View style={styles.header}>
-                    <Image source={require('../assets/images/icon.png')}/>
-                    <Text style={styles.title}>Bem Vindo, Registre-se</Text>
-                </View>
-                <View>  
-                    <View>
-                        <TextInput
-                            style = {styles.input}
-                            placeholder={'Nome'}
-                            value={this.state.name}
-                            onChangeText={(name) => this.setState({name})}
-                            autoCompleteType={'name'}
-                        />
+                <View style={styles.responsive}>
+                    <View style={styles.header}>
+                        <Image source={require('../assets/images/icon.png')}/>
+                        <Text style={styles.title}>Bem Vindo, Registre-se</Text>
                     </View>
+                    <View>  
+                        <View>
+                            <TextInput
+                                style = {styles.input}
+                                placeholder={'Nome'}
+                                value={this.state.name}
+                                onChangeText={(name) => this.setState({name})}
+                                autoCompleteType={'name'}
+                            />
+                        </View>
 
-                    <View>
-                        <TextInput
-                            style = {styles.input} 
-                            placeholder={'Nickname'}
-                            value={this.state.nick}
-                            onChangeText={(nick) => this.setState({nick})}
-                        />
-                    </View>
+                        <View>
+                            <TextInput
+                                style = {styles.input} 
+                                placeholder={'Nickname'}
+                                value={this.state.nick}
+                                onChangeText={(nick) => this.setState({nick})}
+                            />
+                        </View>
 
-                    <View>
-                        <TextInput
-                            style = {styles.input} 
-                            placeholder={'E-mail'}
-                            value={this.state.email}
-                            onChangeText={(email) => this.setState({email})}
-                            autoCompleteType={'email'}
-                            keyboardType={'email-address'}
-                        />
-                    </View>
+                        <View>
+                            <TextInput
+                                style = {styles.input} 
+                                placeholder={'E-mail'}
+                                value={this.state.email}
+                                onChangeText={(email) => this.setState({email})}
+                                autoCompleteType={'email'}
+                                keyboardType={'email-address'}
+                            />
+                        </View>
 
-                    <View>
-                        <TextInput
-                            style = {styles.input} 
-                            placeholder={'Senha'}
-                            value={this.state.password}
-                            onChangeText={(password) => this.setState({password})}
-                            autoCompleteType={'password'}
-                            secureTextEntry
-                        />
-                    </View>
+                        <View>
+                            <TextInput
+                                style = {styles.input} 
+                                placeholder={'Senha'}
+                                value={this.state.password}
+                                onChangeText={(password) => this.setState({password})}
+                                autoCompleteType={'password'}
+                                secureTextEntry
+                            />
+                        </View>
 
-                    <View>
-                        <TextInput
-                            style = {styles.input} 
-                            placeholder={'Confirme a Senha'}
-                            value={this.state.checkPassword}
-                            onChangeText={(checkPassword) => this.setState({checkPassword})}
-                            autoCompleteType={'password'}
-                            secureTextEntry
-                        />
-                    </View>
-            
-                    {/* <ImagePicker style = {styles.button}/> */}
-                   
-                    <View>
-                        <TouchableOpacity
-                                title="Register"
-                                style={styles.button}
-                                onPress={this.registerSubmit.bind(this)}>
-                                <Text style={styles.buttonText} >CADASTRAR</Text>
-                        </TouchableOpacity>
-                    </View>
+                        <View>
+                            <TextInput
+                                style = {styles.input} 
+                                placeholder={'Confirme a Senha'}
+                                value={this.state.checkPassword}
+                                onChangeText={(checkPassword) => this.setState({checkPassword})}
+                                autoCompleteType={'password'}
+                                secureTextEntry
+                            />
+                        </View>
+                
+                        {/* <ImagePicker style = {styles.button}/> */}
+                    
+                        <View>
+                            <TouchableOpacity
+                                    title="Register"
+                                    style={styles.button}
+                                    onPress={this.registerSubmit.bind(this)}>
+                                    <Text style={styles.buttonText} >CADASTRAR</Text>
+                            </TouchableOpacity>
+                        </View>
 
-                    <View style={styles.footer}>
-                        <Text style={styles.textLogin}>Já tenho uma conta:</Text>
+                        <View style={styles.footer}>
+                            <Text style={styles.textLogin}>Já tenho uma conta:</Text>
 
-                        <TouchableOpacity
-                            onPress={ () => this.props.navigation.navigate('Login')}
-                            style={styles.loginButton} title = "Entrar"
-                        >
-                        <Text style = {styles.textButtonLogin}>ENTRAR</Text></TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={ () => this.props.navigation.navigate('Login')}
+                                style={styles.loginButton} title = "Entrar"
+                            >
+                            <Text style = {styles.textButtonLogin}>ENTRAR</Text></TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </SafeAreaView>
@@ -150,10 +152,15 @@ export default class Register extends Component {
 const styles = StyleSheet.create({
 
     container: {
-        marginTop: 10,
+        marginTop: hp('%2'),
 		flex: 1,
         alignItems: 'center',
-        padding: 3
+        padding: 3,
+    },
+
+    responsive:{
+        height: hp('80%'), 
+        width: wp('90%')
     },
 
     header: {
@@ -171,35 +178,36 @@ const styles = StyleSheet.create({
     },
 
     title: { 
-        fontSize: 20,
+        fontSize:hp('3%'),
     },
 
     button:{
 		backgroundColor:'black',
-		paddingVertical:12,
-		marginTop: 20
+        marginTop: hp('3%'),
+        padding: hp('2%')
 	},
 
     input: {
-		fontSize:20,
-		width:350,
-		height:80,
+		fontSize:hp('2.5%'),
+		width: wp('90%'),
+		height: hp('10%'),
 		borderRadius: 0,
 		borderBottomWidth: 2,
 		borderColor: 'black',
     },
 
     buttonText:{
-        fontSize:20,
+        fontSize:hp('2.5%'),
 		color: 'white',
-		textAlign:'center'
+        textAlign:'center',
+        fontWeight:'bold',
     },
     
     textButtonLogin:{
 		color: 'black',
 		fontWeight:'bold',
 		textAlign:'center',
-		fontSize: 20
+		fontSize:hp('2.5%')
     },
 
     loginButton:{
