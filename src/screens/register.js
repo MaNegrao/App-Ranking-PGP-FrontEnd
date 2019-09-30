@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import { View, TextInput, Button, Text, StyleSheet, Image } from 'react-native';
 import ImagePicker from "../components/imagePicker";
 import SafeAreaView from 'react-native-safe-area-view';
-import { TouchableOpacity } from 'react-native-gesture-handler';    
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class Register extends Component {
     constructor() {
@@ -44,7 +44,7 @@ export default class Register extends Component {
         } else if (password.length < 8){
             alert("A senha deve ter no mínimo 8 digitos")
             return false
-        } else 
+        } else
             return true
     }
 
@@ -55,7 +55,7 @@ export default class Register extends Component {
         else{
             const response = api.post('/players', this.state)
             const resposta = api.get('/players')
-            console.log(response)
+            console.log(response.body)
         }
     }
 
@@ -67,7 +67,7 @@ export default class Register extends Component {
                         <Image source={require('../assets/images/icon.png')}/>
                         <Text style={styles.title}>Bem Vindo, Registre-se</Text>
                     </View>
-                    <View>  
+                    <View>
                         <View>
                             <TextInput
                                 style = {styles.input}
@@ -80,7 +80,7 @@ export default class Register extends Component {
 
                         <View>
                             <TextInput
-                                style = {styles.input} 
+                                style = {styles.input}
                                 placeholder={'Nickname'}
                                 value={this.state.nick}
                                 onChangeText={(nick) => this.setState({nick})}
@@ -89,7 +89,7 @@ export default class Register extends Component {
 
                         <View>
                             <TextInput
-                                style = {styles.input} 
+                                style = {styles.input}
                                 placeholder={'E-mail'}
                                 value={this.state.email}
                                 onChangeText={(email) => this.setState({email})}
@@ -100,7 +100,7 @@ export default class Register extends Component {
 
                         <View>
                             <TextInput
-                                style = {styles.input} 
+                                style = {styles.input}
                                 placeholder={'Senha'}
                                 value={this.state.password}
                                 onChangeText={(password) => this.setState({password})}
@@ -111,7 +111,7 @@ export default class Register extends Component {
 
                         <View>
                             <TextInput
-                                style = {styles.input} 
+                                style = {styles.input}
                                 placeholder={'Confirme a Senha'}
                                 value={this.state.checkPassword}
                                 onChangeText={(checkPassword) => this.setState({checkPassword})}
@@ -119,9 +119,9 @@ export default class Register extends Component {
                                 secureTextEntry
                             />
                         </View>
-                
+
                         {/* <ImagePicker style = {styles.button}/> */}
-                    
+
                         <View>
                             <TouchableOpacity
                                     title="Register"
@@ -152,14 +152,14 @@ export default class Register extends Component {
 const styles = StyleSheet.create({
 
     container: {
-        marginTop: hp('%2'),
+        marginTop: 10,
 		flex: 1,
         alignItems: 'center',
         padding: 3,
     },
 
     responsive:{
-        height: hp('80%'), 
+        height: hp('80%'),
         width: wp('90%')
     },
 
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
 
-    title: { 
+    title: {
         fontSize:hp('3%'),
     },
 
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontWeight:'bold',
     },
-    
+
     textButtonLogin:{
 		color: 'black',
 		fontWeight:'bold',
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
 		backgroundColor:'transparent',
 		alignSelf:'flex-end'
 	},
-    
+
 	textLogin:{
 		color: 'black',
 		fontSize: 16
