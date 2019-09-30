@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
 	},
 
 	footer: {
+		marginTop: 30,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     },
 
     registerButton:{
-		backgroundColor:'white',
+		backgroundColor:'transparent',
 		alignSelf:'flex-end'
 	},
     
