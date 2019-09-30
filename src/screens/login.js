@@ -1,6 +1,6 @@
 import api from '../services/api'
 import React, {Component} from 'react';
-import { View, TextInput, Button, StyleSheet, Text, Image, StatusBar} from 'react-native';
+import { View, TextInput, Button, StyleSheet, Text, Image, StatusBar, AsyncStorage} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { withFormik } from 'formik';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -9,39 +9,45 @@ export default class Login extends Component {
 	constructor() {
         super();
         this.state = {
-            nick: '',
+            email: '',
             password: '',
         }
 	}
-	
+
 	loginSubmit = () => {
-        const response = api.get('/players/:nickname', this.state.nick)
-    	console.log(response)
+        const response = api.post('/authenticate', this.state)
+		.then(response => {
+		    console.log(response.data);
+			AsyncStorage.setItem('userToken', response.data.token);
+		})
+		.catch(error =>{
+			console.log(error);
+		})
 	}
 
 	render () {
 		return(
 			<View style={styles.container}>
-				<StatusBar backgroundColor="#000000" hidden={false} translucent={false} currentHeight={20}/>	
+				<StatusBar backgroundColor="#000000" hidden={false} translucent={false} currentHeight={20}/>
 				<Image source={require('../assets/images/icon.png')} style={styles.logo}/>
 				<View>
 					<View>
-						<TextInput 
+						<TextInput
 							style = {styles.input}
-							value={this.state.nick}
-							onChangeText={(nick) => this.setState({nick})}
-							returnsKeyType="next" 
-							placeholder='Nickname' 
+							value={this.state.email}
+							onChangeText={(email) => this.setState({email})}
+							returnsKeyType="next"
+							placeholder='E-mail'
 						/>
 					</View>
 					<View>
-						<TextInput 
-							style = {styles.input}   
-							returnKeyType="go" 
+						<TextInput
+							style = {styles.input}
+							returnKeyType="go"
 							value={this.state.password}
 							onChangeText={(password) => this.setState({password})}
 							autoCompleteType={'password'}
-							placeholder='Senha'             
+							placeholder='Senha'
 							secureTextEntry
 						/>
 					</View>
@@ -53,10 +59,10 @@ export default class Login extends Component {
 						<Text style = {styles.text}>LOGIN</Text>
 						</TouchableOpacity>
 					</View>
-					
-					<View style={styles.footer}> 
+
+					<View style={styles.footer}>
 						<Text style={styles.textRegister}>Não tem uma conta? </Text>
-						
+
 						<TouchableOpacity
 							onPress={ () => this.props.navigation.navigate('Register')}
 							style={styles.registerButton} title = "Cadastrar-se"
@@ -66,7 +72,7 @@ export default class Login extends Component {
 			</View>
 		)
 	}
-	
+
 }
 
 const styles = StyleSheet.create({
@@ -87,7 +93,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		height: hp('80%'), 
+		height: hp('80%'),
         width: wp('90%')
 	},
 	button:{
@@ -108,7 +114,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around',
     },
-	
+
 	textButtonRegister:{
 		color: 'black',
 		fontWeight:'bold',
@@ -120,7 +126,7 @@ const styles = StyleSheet.create({
 		backgroundColor:'transparent',
 		alignSelf:'flex-end'
 	},
-    
+
 	textRegister:{
 		color: 'black',
 		fontSize: 16
