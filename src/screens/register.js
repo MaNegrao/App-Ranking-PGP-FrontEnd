@@ -53,9 +53,13 @@ export default class Register extends Component {
         if (this.validate(ts.name, ts.nick, ts.email, ts.password, ts.checkPassword) == false)
             console.log("Erro")
         else{
-            const response = api.post('/players', this.state)
-            const resposta = api.get('/players')
-            console.log(response)
+            api.post('/players', this.state)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
         }
     }
 
@@ -152,7 +156,7 @@ export default class Register extends Component {
 const styles = StyleSheet.create({
 
     container: {
-        marginTop: hp('%2'),
+        marginTop: 10,
 		flex: 1,
         alignItems: 'center',
         padding: 3,
