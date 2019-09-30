@@ -74,30 +74,30 @@ const styles = StyleSheet.create({
 		margin:5
 	},
 	input: {
-		fontSize:20,
-		marginTop:10,
-		width:350,
-		height:80,
-		padding: 10,
+		marginTop: 10,
+		fontSize:hp('2.5%'),
+		width: wp('90%'),
+		height: hp('10%'),
 		borderRadius: 0,
 		borderBottomWidth: 2,
 		borderColor: 'black',
 	},
 	container: {
-		margin:30,
+		margin: 20,
 		flex: 1,
-		justifyContent: 'center',
 		alignItems: 'center',
+		justifyContent: 'center',
 		height: hp('80%'), 
         width: wp('90%')
 	},
 	button:{
 		backgroundColor:'black',
-		paddingVertical:12,
-		marginTop:20
+        marginTop: hp('3%'),
+        fontWeight:'bold',
+        padding: hp('2%'),
 	},
 	text:{
-		fontSize: 20,
+		fontSize:hp('2.5%'),
 		color: 'white',
 		textAlign:'center'
 	},
