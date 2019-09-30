@@ -1,6 +1,6 @@
 import api from '../services/api'
 import React, {Component} from 'react';
-import { View, TextInput, Button, StyleSheet, Text, Image} from 'react-native';
+import { View, TextInput, Button, StyleSheet, Text, Image, StatusBar} from 'react-native';
 import { withFormik } from 'formik';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -21,7 +21,7 @@ export default class Login extends Component {
 	render () {
 		return(
 			<View style={styles.container}>
-
+				<StatusBar backgroundColor="#000000" hidden={false} translucent={false} currentHeight={20}/>	
 				<Image source={require('../assets/images/icon.png')} style={styles.logo}/>
 				<View>
 					<View>

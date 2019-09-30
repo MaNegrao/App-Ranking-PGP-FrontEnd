@@ -150,8 +150,10 @@ export default class Register extends Component {
 const styles = StyleSheet.create({
 
     container: {
+        marginTop: 10,
 		flex: 1,
-		alignItems: 'center',
+        alignItems: 'center',
+        padding: 3
     },
 
     header: {
