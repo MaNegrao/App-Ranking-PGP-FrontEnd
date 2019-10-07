@@ -23,6 +23,11 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.rntest.urg",
+      "versionCode": 1,
+      "permissions": []
+    },
     "ios": {
       "supportsTablet": true
     }
