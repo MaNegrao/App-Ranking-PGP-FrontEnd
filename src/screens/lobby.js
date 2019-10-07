@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, StyleSheet, TextInput, FlatList, TouchableOpacity, Image} from 'react-native';
+import { View, Text, StyleSheet, TextInput, FlatList, TouchableOpacity, Image, AsyncStorage} from 'react-native';
 import { AuthSession } from 'expo';
 import { ScrollView } from 'react-native';
 
@@ -77,7 +77,7 @@ export default class Lobby extends Component {
 							style={styles.button}>
 						<Text style = {styles.text}>CONVIDAR</Text>
 				</TouchableOpacity>
-                
+
             </View>
         </View>
     )
@@ -86,12 +86,25 @@ export default class Lobby extends Component {
 
     }
 
+    _signOutAsync = async () => {
+      await AsyncStorage.clear();
+      this.props.navigation.navigate('Auth');
+    };
     render(){
         return(
             <View style={styles.container}>
-            <View style = {styles.centerRowTop}><Image source={
+                <View style = {styles.centerRowTop}>
+                    <TouchableOpacity
+                        onPress={this._signOutAsync}
+                    >
+                        <Image source={
+                        require('../assets/images/back.png')
+                        } style={styles.img2}/>
+                    </TouchableOpacity>
+                    <Image source={
             				require('../assets/images/miniicon.png')
-            				} style={styles.icone}/></View>
+            				} style={styles.icone}/>
+                </View>
                 <View style={styles.gameTable}>
                     <View style={styles.centerRowTop}>
                         <TouchableOpacity
@@ -158,7 +171,7 @@ export default class Lobby extends Component {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        
+
     },
     button:{
         backgroundColor:'black',
@@ -175,7 +188,7 @@ const styles = StyleSheet.create({
     },
     lt:{
         overflow:'hidden'
-        
+
     },
     rk: {
         color: 'black',
@@ -249,5 +262,5 @@ const styles = StyleSheet.create({
         width:500,
         height: 30,
     }
-    
+
 })

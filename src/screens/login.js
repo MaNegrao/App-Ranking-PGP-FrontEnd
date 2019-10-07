@@ -14,15 +14,10 @@ export default class Login extends Component {
         }
 	}
 
-	loginSubmit = () => {
-        const response = api.post('/authenticate', this.state)
-		.then(response => {
-		    console.log(response.data);
+	loginSubmit = async () => {
+	        const response = await api.post('/authenticate', this.state);
 			AsyncStorage.setItem('userToken', response.data.token);
-		})
-		.catch(error =>{
-			console.log(error);
-		})
+			this.props.navigation.navigate('App');
 	}
 
 	render () {

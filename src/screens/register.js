@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import api from '../services/api';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import { View, TextInput, Button, Text, StyleSheet, Image } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Image, AsyncStorage } from 'react-native';
 import ImagePicker from "../components/imagePicker";
 import SafeAreaView from 'react-native-safe-area-view';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -48,18 +48,14 @@ export default class Register extends Component {
             return true
     }
 
-    registerSubmit = () => {
+    registerSubmit = async () => {
         const ts = this.state
         if (this.validate(ts.name, ts.nick, ts.email, ts.password, ts.checkPassword) == false)
             console.log("Erro")
         else{
-            api.post('/players', this.state)
-            .then(res => {
-                console.log(res);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+            const response = await api.post('/players', this.state);
+            AsyncStorage.setItem('userToken', response.data.token);
+    		this.props.navigation.navigate('App');
         }
     }
 
