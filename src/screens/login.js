@@ -4,6 +4,7 @@ import { View, TextInput, Button, StyleSheet, Text, Image, StatusBar, AsyncStora
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { withFormik } from 'formik';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import {KeyboardAvoidingView} from 'react-native';
 
 export default class Login extends Component {
 	constructor() {
@@ -22,7 +23,7 @@ export default class Login extends Component {
 
 	render () {
 		return(
-			<View style={styles.container}>
+			<KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
 				<StatusBar backgroundColor="#000000" hidden={false} translucent={false} currentHeight={20}/>
 				<Image source={require('../assets/images/icon.png')} style={styles.logo}/>
 				<View>
@@ -64,7 +65,7 @@ export default class Login extends Component {
 						><Text style = {styles.textButtonRegister}>CADASTRAR-SE</Text></TouchableOpacity>
 					</View>
 				</View>
-			</View>
+			</KeyboardAvoidingView>
 		)
 	}
 
