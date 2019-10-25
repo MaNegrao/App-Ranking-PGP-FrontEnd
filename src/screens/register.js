@@ -5,6 +5,7 @@ import { View, TextInput, Button, Text, StyleSheet, Image, AsyncStorage } from '
 import ImagePicker from "../components/imagePicker";
 import SafeAreaView from 'react-native-safe-area-view';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import {KeyboardAvoidingView} from 'react-native';
 
 export default class Register extends Component {
     constructor() {
@@ -61,8 +62,8 @@ export default class Register extends Component {
 
     render () {
         return(
-			<SafeAreaView  style={styles.container}>
-                <View style={styles.responsive}>
+            <SafeAreaView style={styles.container}>
+                <KeyboardAvoidingView behavior="padding" enabled>
                     <View style={styles.header}>
                         <Image source={require('../assets/images/icon.png')}/>
                         <Text style={styles.title}>Bem Vindo, Registre-se</Text>
@@ -141,10 +142,9 @@ export default class Register extends Component {
                             <Text style = {styles.textButtonLogin}>ENTRAR</Text></TouchableOpacity>
                         </View>
                     </View>
-                </View>
+                </KeyboardAvoidingView>
             </SafeAreaView>
         )
-
     }
 
 }
@@ -152,14 +152,11 @@ export default class Register extends Component {
 const styles = StyleSheet.create({
 
     container: {
-        marginTop: 10,
+        margin: 20,
 		flex: 1,
-        alignItems: 'center',
-        padding: 3,
-    },
-
-    responsive:{
-        height: hp('80%'),
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: hp('80%'),
         width: wp('90%')
     },
 

@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import { View, TextInput, Button, StyleSheet, Text, Image, StatusBar, AsyncStorage} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { withFormik } from 'formik';
+import SafeAreaView from 'react-native-safe-area-view';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {KeyboardAvoidingView} from 'react-native';
 
@@ -23,49 +24,51 @@ export default class Login extends Component {
 
 	render () {
 		return(
-			<KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-				<StatusBar backgroundColor="#000000" hidden={false} translucent={false} currentHeight={20}/>
-				<Image source={require('../assets/images/icon.png')} style={styles.logo}/>
-				<View>
+            <SafeAreaView style={styles.container}>
+				<KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+					<StatusBar backgroundColor="#000000" hidden={false} translucent={false} currentHeight={20}/>
+					<Image source={require('../assets/images/icon.png')} style={styles.logo}/>
 					<View>
-						<TextInput
-							style = {styles.input}
-							value={this.state.email}
-							onChangeText={(email) => this.setState({email})}
-							returnsKeyType="next"
-							placeholder='E-mail'
-						/>
-					</View>
-					<View>
-						<TextInput
-							style = {styles.input}
-							returnKeyType="go"
-							value={this.state.password}
-							onChangeText={(password) => this.setState({password})}
-							autoCompleteType={'password'}
-							placeholder='Senha'
-							secureTextEntry
-						/>
-					</View>
-					<View>
-						<TouchableOpacity
-							onPress={this.loginSubmit}
-							title="Login"
-							style={styles.button}>
-						<Text style = {styles.text}>LOGIN</Text>
-						</TouchableOpacity>
-					</View>
+						<View>
+							<TextInput
+								style = {styles.input}
+								value={this.state.email}
+								onChangeText={(email) => this.setState({email})}
+								returnsKeyType="next"
+								placeholder='E-mail'
+							/>
+						</View>
+						<View>
+							<TextInput
+								style = {styles.input}
+								returnKeyType="go"
+								value={this.state.password}
+								onChangeText={(password) => this.setState({password})}
+								autoCompleteType={'password'}
+								placeholder='Senha'
+								secureTextEntry
+							/>
+						</View>
+						<View>
+							<TouchableOpacity
+								onPress={this.loginSubmit}
+								title="Login"
+								style={styles.button}>
+							<Text style = {styles.text}>LOGIN</Text>
+							</TouchableOpacity>
+						</View>
 
-					<View style={styles.footer}>
-						<Text style={styles.textRegister}>Não tem uma conta? </Text>
+						<View style={styles.footer}>
+							<Text style={styles.textRegister}>Não tem uma conta? </Text>
 
-						<TouchableOpacity
-							onPress={ () => this.props.navigation.navigate('Register')}
-							style={styles.registerButton} title = "Cadastrar-se"
-						><Text style = {styles.textButtonRegister}>CADASTRAR-SE</Text></TouchableOpacity>
+							<TouchableOpacity
+								onPress={ () => this.props.navigation.navigate('Register')}
+								style={styles.registerButton} title = "Cadastrar-se"
+							><Text style = {styles.textButtonRegister}>CADASTRAR-SE</Text></TouchableOpacity>
+						</View>
 					</View>
-				</View>
-			</KeyboardAvoidingView>
+				</KeyboardAvoidingView>
+			</SafeAreaView>
 		)
 	}
 
