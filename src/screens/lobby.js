@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { View, Text, StyleSheet, TextInput, FlatList, TouchableOpacity, Image, AsyncStorage} from 'react-native';
 import { AuthSession } from 'expo';
 import { ScrollView } from 'react-native';
+import Search from '..components/searchPlayers';
 
 export default class Lobby extends Component {
     state = {
