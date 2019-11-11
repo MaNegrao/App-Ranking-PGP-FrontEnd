@@ -42,17 +42,17 @@ export default class Lobby extends Component {
                 </View>
                 <View style={styles.gameTable}>
                     <View style={styles.centerRowTop}>
-                        <Search></Search>
+                        <Search/>
                     </View>
                     <View style={styles.centerRow}>
-                        <Search></Search>
+                        <Search/>
                         <Image source={
                             require('../assets/images/table.png')
                         } style={styles.table}/>
-                        <Search></Search>
+                        <Search/>
                     </View>
                     <View style={styles.centerRowBot}>
-                        <Search></Search>
+                        <Search/>
                     </View>
 
                 </View>
