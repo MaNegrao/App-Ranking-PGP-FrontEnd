@@ -2,90 +2,20 @@ import React, {Component} from 'react';
 import { View, Text, StyleSheet, TextInput, FlatList, TouchableOpacity, Image, AsyncStorage} from 'react-native';
 import { AuthSession } from 'expo';
 import { ScrollView } from 'react-native';
-
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import Search from '../components/searchPlayers'
 export default class Lobby extends Component {
-    state = {
-        player1: '',
-        player2: '',
-        player3: '',
-        player4: '',
-        searchNick: '',
-        searchedUsers: [
+    handledisableenable()
+        {
+           if(1)
             {
-                id: 1,
-                nick: 'Nicolas',
-                ranking: '18º'
-            },
-            {
-                id: 2,
-                nick: 'Matheus',
-                ranking: '1º',
-            },
-            {
-                id: 5,
-                nick: 'William',
-                ranking: '16º'
-            },
-            {
-                id: 7,
-                nick: 'Negrão',
-                ranking: '26º',
-            },
-            {
-                id: 7,
-                nick: 'Vitor',
-                ranking: '100º',
-            },
-            {
-                id: 7,
-                nick: 'Negrão',
-                ranking: '26º',
-            },
-            {
-                id: 7,
-                nick: 'Vitor',
-                ranking: '100º',
-            },
-            {
-                id: 7,
-                nick: 'Vitor',
-                ranking: '100º',
-            },
-            {
-                id: 7,
-                nick: 'Negrão',
-                ranking: '26º',
-            },
-            {
-                id: 7,
-                nick: 'Vitor',
-                ranking: '100º',
+                this.setState({ Isbuttonenable : true });
             }
-        ]
-    }
-    renderItem = ({item}) => (
-        <View style = {styles.lt}>
-            <View style = {styles.list}>
-                <Image source={
-            				require('../assets/images/miniicon.png')
-            				} style={styles.icone}/>
-                <Text style = {styles.nick}>{item.nick}</Text>
-                <Text style = {styles.rk}>  (Ranking: {item.ranking})</Text>
-                <TouchableOpacity
-							onPress={this.loginSubmit}
-							title="Login"
-							style={styles.button}>
-						<Text style = {styles.text}>CONVIDAR</Text>
-				</TouchableOpacity>
-
-            </View>
-        </View>
-    )
-
-    onSeatPress = () => {
-
-    }
-
+          else
+          {
+            this.setState({ Isbuttonenable : false });
+          }
+        }
     _signOutAsync = async () => {
       await AsyncStorage.clear();
       this.props.navigation.navigate('Auth');
@@ -93,85 +23,63 @@ export default class Lobby extends Component {
     render(){
         return(
             <View style={styles.container}>
-                <View style = {styles.centerRowTop}>
+                <View style={styles.leftTop}>
+                    <View  style={styles.out}>
                     <TouchableOpacity
-                        onPress={this._signOutAsync}
-                    >
+                            onPress={this._signOutAsync}
+                        >
+                            <Image source={
+                            require('../assets/images/back.png')
+                            } style={styles.signout}/>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.out1}>
                         <Image source={
-                        require('../assets/images/back.png')
-                        } style={styles.img2}/>
-                    </TouchableOpacity>
-                    <Image source={
-            				require('../assets/images/miniicon.png')
-            				} style={styles.icone}/>
+                                require('../assets/images/miniicon.png')
+                                } style={styles.icone}/>
+                    </View>
                 </View>
                 <View style={styles.gameTable}>
                     <View style={styles.centerRowTop}>
-                        <TouchableOpacity
-                            onPress={this.onSeatPress}
-                        >
-                            <Image source={
-            				require('../assets/images/seat_top.png')
-            				} style={styles.img2}/>
-                        </TouchableOpacity>
+                        <Search></Search>
                     </View>
                     <View style={styles.centerRow}>
-                        <TouchableOpacity
-                            onPress={this.onSeatPress}
-                        >
-                            <Image source={
-            				require('../assets/images/seat_left.png')
-            				} style={styles.img}/>
-                        </TouchableOpacity>
+                        <Search></Search>
                         <Image source={
                             require('../assets/images/table.png')
                         } style={styles.table}/>
-                        <TouchableOpacity
-                            onPress={this.onSeatPress}
-                        >
-                            <Image source={
-            				require('../assets/images/seat_right.png')
-            				} style={styles.img}/>
-                        </TouchableOpacity>
+                        <Search></Search>
                     </View>
                     <View style={styles.centerRowBot}>
-                        <TouchableOpacity
-                            onPress={this.onSeatPress}
-                        >
-                            <Image source={
-            				require('../assets/images/seat_bot.png')
-            				} style={styles.img2}/>
-                        </TouchableOpacity>
+                        <Search></Search>
                     </View>
 
                 </View>
                 <View>
-                    <View style={styles.bar}></View>
-                </View>
-                <View>
-                    <TextInput
-                        style = {styles.input}
-                        value={this.state.searchNick}
-                        returnKeyType="search"
-                        placeholder="Busca por Nick"
-                        onChangeText={(searchNick) => this.setState({searchNick})}
-                    />
-                </View>
-                <View style={styles.lt}>
-                    <FlatList
-                        data={this.state.searchedUsers}
-                        keyExtractor={item => item.id}
-                        renderItem={this.renderItem}
-                     />
+                <TouchableOpacity disabled={this.state.Isbuttonenable ? false : true}
+								style={this.state.Isbuttonenable ?
+                                    styles.buttonstart :
+                                    {opacity: 0.1}} title = "INICIAR PARTIDA"
+							><Text style = {styles.textstart}>INICIAR PARTIDA</Text></TouchableOpacity>
                 </View>
             </View>
         )
     }
 }
 const styles = StyleSheet.create({
+    textstart:{
+		fontSize:hp('4%'),
+		color: 'white',
+		textAlign:'center'
+	},
     container: {
-        alignItems: 'center',
-
+        flex:1
+    },
+    buttonstart:{
+        backgroundColor:'black',
+        marginTop: hp('3%'),
+        fontWeight:'bold',
+        padding: hp('2%'),
     },
     button:{
         backgroundColor:'black',
@@ -182,9 +90,21 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		color: 'white',
 		textAlign:'center'
-	},
+    },
+    out:{
+        alignSelf: 'flex-start',
+    },
+    out1:{
+        alignSelf:'center',
+        paddingLeft: 105,
+    },
     icone:{
-        alignSelf: 'center'
+        width: 100,
+        height: 100,
+    },
+    signout:{
+        width: 40,
+        height: 40,
     },
     lt:{
         overflow:'hidden'
@@ -227,7 +147,6 @@ const styles = StyleSheet.create({
     img2: {
         width: 100,
         height: 100,
-        resizeMode: 'contain'
     },
     input: {
         fontSize:20,
@@ -244,10 +163,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-    centerRowTop: {
-        marginTop:40,
+    leftTop:{
         flexDirection: 'row',
-        alignItems: 'center'
+        marginTop:40,
+    },
+    centerRowTop: {
+        marginTop:80,
+        alignSelf:"center"
     },
     centerRowBot: {
         marginBottom:20,
@@ -256,11 +178,5 @@ const styles = StyleSheet.create({
     },
     gameTable: {
         alignItems:'center'
-    },
-    bar:{
-        backgroundColor: 'black',
-        width:500,
-        height: 30,
     }
-
 })
