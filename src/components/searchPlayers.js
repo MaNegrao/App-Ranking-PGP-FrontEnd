@@ -83,7 +83,7 @@ class Search extends Component {
                         value = {this.state.searchNick}
                         returnKeyType="search"
                         placeholder="Busca por Nick"
-                        onChangeText={(searchNick) => this.handleInputChange({searchNick})}
+                        onChangeText={(searchNick) => this.handleInputChange(searchNick)}
                     />
                 </View>
                 <View style={styles.lt}>
