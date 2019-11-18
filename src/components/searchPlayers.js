@@ -1,13 +1,22 @@
 import React, {Component} from 'react';
 import api from '../services/api'
+<<<<<<< HEAD
 import {Modal, FlatList, TouchableOpacity, Text, TextInput, View, StyleSheet, Image} from 'react-native';
+=======
+import {Modal, FlatList, TouchableOpacity, Text, TextInput, View, StyleSheet, Image, AsyncStorage} from 'react-native';
+>>>>>>> f0fe5d220179f431d3d125bfe46cd3c4de9a4608
 
 class Search extends Component {
   state = {
     modalVisible: false,
     player: '',
+<<<<<<< HEAD
         searchNick: '',
         searchedUsers: []
+=======
+    searchNick: '',
+    searchedUsers: []
+>>>>>>> f0fe5d220179f431d3d125bfe46cd3c4de9a4608
   };
   getPlayers = async () => {
         const token = await AsyncStorage.getItem('userToken')
@@ -35,6 +44,33 @@ class Search extends Component {
         this.getPlayers()
 
     }
+
+  getPlayers = async () => {
+        const token = await AsyncStorage.getItem('userToken')
+        const headers = {
+            'Authorization': 'Bearer ' + token
+        }
+
+        await api.get('/search/'+this.state.searchNick, {headers: headers}
+        ).then((response) => {
+            this.setState({
+                searchedUsers: response.data
+            })
+        }).catch((error) => {
+            this.setState({
+                searchedUsers: []
+            })
+        });
+
+  }
+
+  handleInputChange = (searchNick) => {
+       this.setState({
+           searchNick
+       })
+       this.getPlayers()
+
+  }
 
   onSeatPress(visible) {
     this.setState({modalVisible: visible});
@@ -79,10 +115,14 @@ class Search extends Component {
                 <View>
                     <TextInput
                         style = {styles.input}
-                        value={this.state.searchNick}
+                        value = {this.state.searchNick}
                         returnKeyType="search"
                         placeholder="Busca por Nick"
+<<<<<<< HEAD
                         onChangeText={handleInputChange(searchNick)}
+=======
+                        onChangeText={(searchNick) => this.handleInputChange({searchNick})}
+>>>>>>> f0fe5d220179f431d3d125bfe46cd3c4de9a4608
                     />
                 </View>
                 <View style={styles.lt}>
