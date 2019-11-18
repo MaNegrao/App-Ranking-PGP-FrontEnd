@@ -22,33 +22,34 @@ export default class Lobby extends Component {
       this.props.navigation.navigate('Auth');
     };
     _signProgressMatch = async () => {
-        await AsyncStorage.clear();
-        this.props.navigation.navigate('');
+        this.props.navigation.navigate('Progress');
       };    
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.leftTop}>
                     <View  style={styles.out}>
-                    <TouchableOpacity
-                            onPress={this._signOutAsync}
-                        >
-                            <Image source={
-                            require('../assets/images/back.png')
-                            } style={styles.signout}/>
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                                onPress={this._signOutAsync}
+                            >
+                                <Image source={
+                                require('../assets/images/back.png')
+                                } style={styles.signout}/>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.out1}>
                         <Image source={
                                 require('../assets/images/miniicon.png')
                                 } style={styles.icone}/>
                     </View>
-                    <TouchableOpacity
-                            onPress={this._signProgressMatch}>
-                            <Image source={
-                            require('../assets/images/progress.png')
-                            } style={styles.progress}/>
-                    </TouchableOpacity>
+                    <View style={styles.out2}>
+                        <TouchableOpacity
+                                onPress={this._signProgressMatch}>
+                                <Image source={
+                                require('../assets/images/progress.png')
+                                } style={styles.progress}/>
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 <View style={styles.gameTable}>
                     <View style={styles.centerRowTop}>
@@ -112,6 +113,11 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         paddingLeft: 105,
     },
+    out2:{
+        alignSelf: 'flex-end',
+        paddingLeft: 55,
+        paddingBottom: 50,
+    },
     icone:{
         width: 100,
         height: 100,
@@ -121,8 +127,8 @@ const styles = StyleSheet.create({
         height: 40,
     },
     progress:{
-        width: 160,
-        height: 160,
+        width: 50,
+        height: 50,
     },
     lt:{
         overflow:'hidden'
