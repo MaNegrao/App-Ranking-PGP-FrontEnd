@@ -57,10 +57,13 @@ export default class Lobby extends Component {
 
                 </View>
                 <View>
-                <TouchableOpacity disabled={this.state.Isbuttonenable ? false : true}
-								style={this.state.Isbuttonenable ?
+                    {/* disabled={this.state.Isbuttonenable ? false : true} style={this.state.Isbuttonenable ?
                                     styles.buttonstart :
-                                    {opacity: 0.1}} title = "INICIAR PARTIDA"
+                                    {opacity: 0.1}} */}
+                <TouchableOpacity 
+								style={
+                                    styles.buttonstart
+                                    } title = "INICIAR PARTIDA"
 							><Text style = {styles.textstart}>INICIAR PARTIDA</Text></TouchableOpacity>
                 </View>
             </View>
