@@ -1,18 +1,28 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Image } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import { StyleSheet, View, Image, Text } from 'react-native';
 import Counter from '../components/Counter';
-import { isNullLiteralTypeAnnotation, isPipelineBareFunction } from '@babel/types';
 
 export default function LinksScreen() {
   return (
     <View style={styles.container}>
-      <View style={styles.welcomeContainer}>
-        <Image source={
-          require('../assets/images/paus.png')
-        }
-        style={styles.welcomeImage
-        }/>
+      <View style={styles.headerContainer}>
+        <View>
+          <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
+          <Text>Usuario um</Text>
+        </View>
+        <View>
+          <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
+          <Text>Usuario Dois</Text>
+        </View>
+        <Image source={require('../assets/images/miniicon.png')} style={styles.headerImage}/>
+        <View>
+          <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
+          <Text>Usuario um</Text>
+        </View>
+        <View>
+          <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
+          <Text>Usuario Dois</Text>
+        </View>
       </View>
       <View style={styles.counterContainer}>
         <Counter />
@@ -22,19 +32,24 @@ export default function LinksScreen() {
   );
 }
 
-LinksScreen.navigationOptions = {
-  title: 'Counter',
-};
-
 const styles = StyleSheet.create({
-  welcomeImage: {
-    width: 170,
-    height: 150,
+  headerIcon: {
+
+  },
+  headerImage: {
+    width: 100,
+    height: 80,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
   },
-  welcomeContainer: {
+  profileImage: {
+    width: 50,
+    height: 30,
+    resizeMode: 'contain',
+    borderRadius: 200 / 2,
+  },
+  headerContainer: {
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 20,
@@ -50,4 +65,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
+
 });

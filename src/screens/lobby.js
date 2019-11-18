@@ -57,14 +57,13 @@ export default class Lobby extends Component {
 
                 </View>
                 <View>
-                    {/* disabled={this.state.Isbuttonenable ? false : true} style={this.state.Isbuttonenable ?
-                                    styles.buttonstart :
-                                    {opacity: 0.1}} */}
-                <TouchableOpacity 
-								style={
-                                    styles.buttonstart
-                                    } title = "INICIAR PARTIDA"
-							><Text style = {styles.textstart}>INICIAR PARTIDA</Text></TouchableOpacity>
+                    <TouchableOpacity 
+                        style={ styles.buttonstart} 
+                        title = "INICIAR PARTIDA"
+                        onPress={ () => this.props.navigation.navigate('Game')}>
+                        
+                        <Text style = {styles.textstart}>INICIAR PARTIDA</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
