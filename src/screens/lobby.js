@@ -21,6 +21,10 @@ export default class Lobby extends Component {
       await AsyncStorage.clear();
       this.props.navigation.navigate('Auth');
     };
+    _signProgressMatch = async () => {
+        await AsyncStorage.clear();
+        this.props.navigation.navigate('');
+      };    
     render(){
         return(
             <View style={styles.container}>
@@ -32,13 +36,19 @@ export default class Lobby extends Component {
                             <Image source={
                             require('../assets/images/back.png')
                             } style={styles.signout}/>
-                        </TouchableOpacity>
+                    </TouchableOpacity>
                     </View>
                     <View style={styles.out1}>
                         <Image source={
                                 require('../assets/images/miniicon.png')
                                 } style={styles.icone}/>
                     </View>
+                    <TouchableOpacity
+                            onPress={this._signProgressMatch}>
+                            <Image source={
+                            require('../assets/images/progress.png')
+                            } style={styles.progress}/>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.gameTable}>
                     <View style={styles.centerRowTop}>
@@ -109,6 +119,10 @@ const styles = StyleSheet.create({
     signout:{
         width: 40,
         height: 40,
+    },
+    progress:{
+        width: 160,
+        height: 160,
     },
     lt:{
         overflow:'hidden'
