@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     out2:{
         alignSelf: 'flex-end',
         paddingLeft: 55,
-        paddingBottom: 50,
+        paddingBottom: 70,
     },
     icone:{
         width: 100,
@@ -127,8 +127,8 @@ const styles = StyleSheet.create({
         height: 40,
     },
     progress:{
-        width: 50,
-        height: 50,
+        width: 70,
+        height: 70,
     },
     lt:{
         overflow:'hidden'
