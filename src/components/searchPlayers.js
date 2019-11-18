@@ -1,24 +1,41 @@
 import React, {Component} from 'react';
-import {Modal, FlatList, TouchableOpacity, Text, TextInput, View, StyleSheet, Image} from 'react-native';
+import api from '../services/api'
+import {Modal, FlatList, TouchableOpacity, Text, TextInput, View, StyleSheet, Image, AsyncStorage} from 'react-native';
 
 class Search extends Component {
   state = {
     modalVisible: false,
     player: '',
-        searchNick: '',
-        searchedUsers: [
-            {
-                id: 1,
-                nick: 'Nicolas',
-                ranking: '18º'
-            },
-            {
-                id: 2,
-                nick: 'Matheus',
-                ranking: '1º',
-            }
-        ]
+    searchNick: '',
+    searchedUsers: []
   };
+
+  getPlayers = async () => {
+        const token = await AsyncStorage.getItem('userToken')
+        const headers = {
+            'Authorization': 'Bearer ' + token
+        }
+
+        await api.get('/search/'+this.state.searchNick, {headers: headers}
+        ).then((response) => {
+            this.setState({
+                searchedUsers: response.data
+            })
+        }).catch((error) => {
+            this.setState({
+                searchedUsers: []
+            })
+        });
+
+  }
+
+  handleInputChange = (searchNick) => {
+       this.setState({
+           searchNick
+       })
+       this.getPlayers()
+
+  }
 
   onSeatPress(visible) {
     this.setState({modalVisible: visible});
@@ -31,7 +48,7 @@ class Search extends Component {
                         require('../assets/images/miniicon.png')
                         } style={styles.icone}/>
             <Text style = {styles.nick}>{item.nick}</Text>
-            <Text style = {styles.rk}>  (Ranking: {item.ranking})</Text>
+            <Text style = {styles.rk}>  (Ranking: {item.wins})</Text>
             <TouchableOpacity
                         onPress={this.invite}
                         title="Login"
@@ -63,10 +80,10 @@ class Search extends Component {
                 <View>
                     <TextInput
                         style = {styles.input}
-                        value={this.state.searchNick}
+                        value = {this.state.searchNick}
                         returnKeyType="search"
                         placeholder="Busca por Nick"
-                        onChangeText={(searchNick) => this.setState({searchNick})}
+                        onChangeText={(searchNick) => this.handleInputChange({searchNick})}
                     />
                 </View>
                 <View style={styles.lt}>
@@ -79,7 +96,7 @@ class Search extends Component {
             </View>
         </Modal>
 
-        <TouchableOpacity 
+        <TouchableOpacity
             onPress={() => {this.onSeatPress(true);}
             }>
             <Image source={
