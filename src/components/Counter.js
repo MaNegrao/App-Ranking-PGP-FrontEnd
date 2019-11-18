@@ -20,7 +20,7 @@ class Counter extends Component {
   }
 
   render(){
-    const { count } = this.state.count;
+    const { count } = this.state;
     return (
       <View style={styles.container} className="counter">
         <Text style={styles.text}>{ count }</Text>
