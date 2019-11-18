@@ -21,6 +21,10 @@ export default class Lobby extends Component {
       await AsyncStorage.clear();
       this.props.navigation.navigate('Auth');
     };
+    get_nick = async () => {
+      const token = await AsyncStorage.getItem('nick');
+      return token;
+    }
     render(){
         return(
             <View style={styles.container}>
@@ -52,7 +56,14 @@ export default class Lobby extends Component {
                         <Search/>
                     </View>
                     <View style={styles.centerRowBot}>
-                        <Search/>
+                        <TouchableOpacity>
+                            <Image source={
+                                require('../assets/images/seat_bot.png')
+                                } style={styles.seatImg}/>
+                                <View style={{position: 'absolute',  top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
+                                    <Text>{this.get_nick}</Text>
+                                </View>
+                        </TouchableOpacity>
                     </View>
 
                 </View>
@@ -60,7 +71,7 @@ export default class Lobby extends Component {
                     {/* disabled={this.state.Isbuttonenable ? false : true} style={this.state.Isbuttonenable ?
                                     styles.buttonstart :
                                     {opacity: 0.1}} */}
-                <TouchableOpacity 
+                <TouchableOpacity
 								style={
                                     styles.buttonstart
                                     } title = "INICIAR PARTIDA"
@@ -78,6 +89,11 @@ const styles = StyleSheet.create({
 	},
     container: {
         flex:1
+    },
+    seatImg: {
+        width: 100,
+        height: 100,
+        resizeMode: 'contain'
     },
     buttonstart:{
         backgroundColor:'black',
