@@ -9,6 +9,7 @@ export default class Lobby extends Component {
     constructor() {
         super();
         this.state = {
+            imagens:[require('../assets/images/seat_top.png'),require("../assets/images/seat_left.png"),require("../assets/images/seat_right.png")],
             self_nick: '',
             partner_nick: '',
             left_adversary_nick: '',
@@ -87,14 +88,14 @@ export default class Lobby extends Component {
                 </View>
                 <View style={styles.gameTable}>
                     <View style={styles.centerRowTop}>
-                        <Search parentCallback = {this.callbackFunction}/>
+                        <Search imagem={this.state.imagens[0]} parentCallback = {this.callbackFunction}/>
                     </View>
                     <View style={styles.centerRow}>
-                        <Search parentCallback = {this.callbackFunction2}/>
+                        <Search imagem={this.state.imagens[1]} parentCallback = {this.callbackFunction2}/>
                         <Image source={
                             require('../assets/images/table.png')
                         } style={styles.table}/>
-                        <Search parentCallback = {this.callbackFunction3}/>
+                        <Search imagem={this.state.imagens[2]} parentCallback = {this.callbackFunction3}/>
                     </View>
                     <View style={styles.centerRowBot}>
                       <TouchableOpacity disabled={true}>
@@ -111,7 +112,10 @@ export default class Lobby extends Component {
                             styles.buttonstart :styles.buttonstartDisable
                             }  
                         title = "INICIAR PARTIDA"
-                        onPress={ () => this.props.navigation.navigate('Game')}>
+                        onPress={ () => this.props.navigation.navigate('Game', {
+                            t1: [this.state.self_nick , this.state.partner_nick],
+                            t2: [this.state.left_adversary_nick, this.state.right_adversary_nick],
+                        })}>
 
                         <Text style = {styles.textstart}>INICIAR PARTIDA</Text>
                     </TouchableOpacity>
