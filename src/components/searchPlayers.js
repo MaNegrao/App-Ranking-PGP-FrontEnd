@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import api from '../services/api'
 import {Modal, FlatList, TouchableOpacity, Text, TextInput, View, StyleSheet, Image, AsyncStorage} from 'react-native';
 
-class Search extends Component {
+
+class Search extends React.Component {
   state = {
     modalVisible: false,
     player: '',
@@ -36,11 +37,16 @@ class Search extends Component {
        this.getPlayers()
 
   }
+  sendData = (nick) => {
+    this.props.parentCallback(nick);
+  }
    
 
   handleClick = (nick) =>{
     this.onSeatPress(false)
-    this.setState({player:'kkkkk'})
+    this.setState({player : nick})
+    this.sendData(nick)
+    
 
   }
 
@@ -58,7 +64,7 @@ class Search extends Component {
             <Text style = {styles.rk}>  (Ranking: {item.wins})</Text>
             <TouchableOpacity
                         value = {item.nick}
-                        onPress={(nick) => this.handleClick(nick)}
+                        onPress={(nick) => this.handleClick(item.nick)}
                         title="Login"
                         style={styles.button}>
                     <Text style = {styles.text}>CONVIDAR</Text>
