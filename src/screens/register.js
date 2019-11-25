@@ -56,6 +56,11 @@ export default class Register extends Component {
         else{
             const response = await api.post('/players', this.state);
             AsyncStorage.setItem('userToken', response.data.token);
+            AsyncStorage.setItem('email', this.state.email);
+            AsyncStorage.setItem('id', this.state.id);
+            AsyncStorage.setItem('name', this.state.name);
+            AsyncStorage.setItem('nick', this.state.nick);
+            AsyncStorage.setItem('pic_path', this.state.wins);
     		this.props.navigation.navigate('App');
         }
     }

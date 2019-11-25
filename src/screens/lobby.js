@@ -6,6 +6,16 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import Search from '../components/searchPlayers'
 
 export default class Lobby extends Component {
+  constructor() {
+        super();
+        this.state = {
+            self_nick: '',
+            partner_nick: '',
+            left_adversary_nick: '',
+            right_adversary_nick: '',
+            count: 0
+        }
+  }
     handledisableenable()
         {
            if(1)
@@ -25,60 +35,76 @@ export default class Lobby extends Component {
       const token = await AsyncStorage.getItem('nick');
       return token;
     }
-    render(){
-        return(
-            <View style={styles.container}>
-                <View style={styles.leftTop}>
-                    <View  style={styles.out}>
-                    <TouchableOpacity
-                            onPress={this._signOutAsync}
-                        >
-                            <Image source={
-                            require('../assets/images/back.png')
-                            } style={styles.signout}/>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.out1}>
-                        <Image source={
-                                require('../assets/images/miniicon.png')
-                                } style={styles.icone}/>
-                    </View>
-                </View>
-                <View style={styles.gameTable}>
-                    <View style={styles.centerRowTop}>
-                        <Search/>
-                    </View>
-                    <View style={styles.centerRow}>
-                        <Search/>
-                        <Image source={
-                            require('../assets/images/table.png')
-                        } style={styles.table}/>
-                        <Search/>
-                    </View>
-                    <View style={styles.centerRowBot}>
-                        <TouchableOpacity>
-                            <Image source={
-                                require('../assets/images/seat_bot.png')
-                                } style={styles.seatImg}/>
-                                <View style={{position: 'absolute',  top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
-                                    <Text>{this.get_nick}</Text>
-                                </View>
-                        </TouchableOpacity>
-                    </View>
+    componentWillMount(){
+      AsyncStorage.getItem("nick").then((value) => {
+          this.setState({"self_nick": value});
+      })
+      .then(res => {
 
-                </View>
-                <View>
-                    {/* disabled={this.state.Isbuttonenable ? false : true} style={this.state.Isbuttonenable ?
-                                    styles.buttonstart :
-                                    {opacity: 0.1}} */}
-                <TouchableOpacity
-								style={
-                                    styles.buttonstart
-                                    } title = "INICIAR PARTIDA"
-							><Text style = {styles.textstart}>INICIAR PARTIDA</Text></TouchableOpacity>
-                </View>
+      });
+    }
+    render(){
+        if(!this.state.self_nick){
+          return(
+            <View>
+              <Text>Loading</Text>
             </View>
-        )
+          )
+        }else{
+          return(
+              <View style={styles.container}>
+                  <View style={styles.leftTop}>
+                      <View  style={styles.out}>
+                      <TouchableOpacity
+                              onPress={this._signOutAsync}
+                          >
+                              <Image source={
+                              require('../assets/images/back.png')
+                              } style={styles.signout}/>
+                          </TouchableOpacity>
+                      </View>
+                      <View style={styles.out1}>
+                          <Image source={
+                                  require('../assets/images/miniicon.png')
+                                  } style={styles.icone}/>
+                      </View>
+                  </View>
+                  <View style={styles.gameTable}>
+                      <View style={styles.centerRowTop}>
+                          <Search/>
+                      </View>
+                      <View style={styles.centerRow}>
+                          <Search/>
+                          <Image source={
+                              require('../assets/images/table.png')
+                          } style={styles.table}/>
+                          <Search/>
+                      </View>
+                      <View style={styles.centerRowBot}>
+                          <TouchableOpacity>
+                              <Image source={
+                                  require('../assets/images/seat_bot.png')
+                                  } style={styles.seatImg}/>
+                                  <View style={{position: 'absolute',  top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
+                                      <Text>{this.state.self_nick}</Text>
+                                  </View>
+                          </TouchableOpacity>
+                      </View>
+
+                  </View>
+                  <View>
+                      {/* disabled={this.state.Isbuttonenable ? false : true} style={this.state.Isbuttonenable ?
+                                      styles.buttonstart :
+                                      {opacity: 0.1}} */}
+                  <TouchableOpacity
+  								style={
+                                      styles.buttonstart
+                                      } title = "INICIAR PARTIDA"
+  							><Text style = {styles.textstart}>INICIAR PARTIDA</Text></TouchableOpacity>
+                  </View>
+              </View>
+          )
+        }
     }
 }
 const styles = StyleSheet.create({
