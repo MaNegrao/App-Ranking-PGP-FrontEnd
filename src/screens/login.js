@@ -17,8 +17,13 @@ export default class Login extends Component {
 	}
 
 	loginSubmit = async () => {
-	        const response = await api.post('/authenticate', this.state);
+      const response = await api.post('/authenticate', this.state);
+			console.log(response.data);
 			AsyncStorage.setItem('userToken', response.data.token);
+			AsyncStorage.setItem('email', response.data.player.email);
+			AsyncStorage.setItem('id', response.data.player.id);
+			AsyncStorage.setItem('name', response.data.player.name);
+			AsyncStorage.setItem('nick', response.data.player.nick);
 			this.props.navigation.navigate('App');
 	}
 
