@@ -1,35 +1,81 @@
-import React from 'react';
+import React, { Component }  from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
 import Counter from '../components/Counter';
 
-export default function LinksScreen() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <View>
-          <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
-          <Text>Usuario um</Text>
+export default class Game extends Component {
+
+	constructor() {
+    super();
+    this.state = {
+        score_t1: 0,
+        score_t2: 0,
+    }
+  }
+  
+  verifica() {
+    if(this.state.score_t1 == 12) {
+      alert('Time 1 Ganhou!!!');
+    }
+    else if(this.state.score_t2 == 12) {
+      alert('Time 2 Ganhou!!!');
+    }
+  }
+
+  handleIncrement = (counter) => {
+    if(counter == 't1'){
+      this.setState({
+        score_t1: this.state.score_t1 + 1 < 12 ? this.state.score_t1 + 1 : 12
+      });  
+    } else {
+      this.setState({
+        score_t2: this.state.score_t2 + 1 < 12 ? this.state.score_t2 + 1 : 12
+      });
+    }
+    this.verifica();
+  }
+  
+  handleDecrement = (counter) => {
+    if(counter == 't1'){
+      this.setState({
+        score_t1: this.state.score_t1 == 0 ? 0 : this.state.score_t1 - 1
+      });  
+    } else {
+      this.setState({
+        score_t2: this.state.score_t2 == 0 ? 0 : this.state.score_t2 - 1
+      });
+    }
+    console.log(this.state);
+  }
+
+  render(){
+    return (
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <View>
+            <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
+            <Text>Usuario um</Text>
+          </View>
+          <View>
+            <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
+            <Text>Usuario Dois</Text>
+          </View>
+          <Image source={require('../assets/images/miniicon.png')} style={styles.headerImage}/>
+          <View>
+            <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
+            <Text>Usuario um</Text>
+          </View>
+          <View>
+            <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
+            <Text>Usuario Dois</Text>
+          </View>
         </View>
-        <View>
-          <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
-          <Text>Usuario Dois</Text>
-        </View>
-        <Image source={require('../assets/images/miniicon.png')} style={styles.headerImage}/>
-        <View>
-          <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
-          <Text>Usuario um</Text>
-        </View>
-        <View>
-          <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
-          <Text>Usuario Dois</Text>
-        </View>
+        <View style={styles.counterContainer}>
+          <Counter name='t1' functionHandleIncrement={this.handleIncrement} functionHandleDecrement={this.handleDecrement} />
+          <Counter name='t2' functionHandleIncrement={this.handleIncrement} functionHandleDecrement={this.handleDecrement} />
+        </View>  
       </View>
-      <View style={styles.counterContainer}>
-        <Counter />
-        <Counter />
-      </View>  
-    </View>
-  );
+    )
+  }
 }
 
 const styles = StyleSheet.create({
