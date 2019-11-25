@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import api from '../services/api'
 import {Modal, FlatList, TouchableOpacity, Text, TextInput, View, StyleSheet, Image, AsyncStorage} from 'react-native';
 
-class Search extends Component {
+
+class Search extends React.Component {
   state = {
     modalVisible: false,
     player: '',
     searchNick: '',
-    searchedUsers: []
+    searchedUsers: [],
   };
 
   getPlayers = async () => {
@@ -36,6 +37,18 @@ class Search extends Component {
        this.getPlayers()
 
   }
+  sendData = (nick) => {
+    this.props.parentCallback(nick);
+  }
+   
+
+  handleClick = (nick) =>{
+    this.onSeatPress(false)
+    this.setState({player : nick})
+    this.sendData(nick)
+    
+
+  }
 
   onSeatPress(visible) {
     this.setState({modalVisible: visible});
@@ -50,7 +63,8 @@ class Search extends Component {
             <Text style = {styles.nick}>{item.nick}</Text>
             <Text style = {styles.rk}>  (Ranking: {item.wins})</Text>
             <TouchableOpacity
-                        onPress={this.invite}
+                        value = {item.nick}
+                        onPress={(nick) => this.handleClick(item.nick)}
                         title="Login"
                         style={styles.button}>
                     <Text style = {styles.text}>CONVIDAR</Text>
@@ -60,6 +74,19 @@ class Search extends Component {
 )
 
   render() {
+    const getCircularReplacer = () => {
+        const seen = new WeakSet();
+        return (key, value) => {
+          if (typeof value === "object" && value !== null) {
+            if (seen.has(value)) {
+              return;
+            }
+            seen.add(value);
+          }
+          return value;
+        };
+      };
+    const {player} = this.state;
     return (
       <View style={styles.container}>
         <Modal
@@ -103,6 +130,7 @@ class Search extends Component {
                 require('../assets/images/seat_bot.png')
                 } style={styles.seatImg}/>
             </TouchableOpacity>
+        <Text>{player}</Text>
       </View>
     );
   }

@@ -6,7 +6,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import Search from '../components/searchPlayers'
 
 export default class Lobby extends Component {
-  constructor() {
+    constructor() {
         super();
         this.state = {
             self_nick: '',
@@ -15,10 +15,27 @@ export default class Lobby extends Component {
             right_adversary_nick: '',
             count: 0
         }
-  }
+    }
+
+    callbackFunction = async (childData) =>{
+        this.setState({partner_nick : childData})
+        await this.setState({count: this.state.count + 1})
+        this.handledisableenable()
+    }
+    callbackFunction2 = async (childData) =>{
+        this.setState({left_adversary_nick : childData})
+        await this.setState({count: this.state.count + 1})
+        this.handledisableenable()
+    }
+    callbackFunction3 = async (childData) =>{
+        this.setState({right_adversary_nick : childData})
+        await this.setState({count: this.state.count + 1})
+        this.handledisableenable()
+
+    }
     handledisableenable()
         {
-           if(1)
+           if(this.state.count == 3)
             {
                 this.setState({ Isbuttonenable : true });
             }
@@ -70,30 +87,29 @@ export default class Lobby extends Component {
                 </View>
                 <View style={styles.gameTable}>
                     <View style={styles.centerRowTop}>
-                        <Search/>
+                        <Search parentCallback = {this.callbackFunction}/>
                     </View>
                     <View style={styles.centerRow}>
-                        <Search/>
+                        <Search parentCallback = {this.callbackFunction2}/>
                         <Image source={
                             require('../assets/images/table.png')
                         } style={styles.table}/>
-                        <Search/>
+                        <Search parentCallback = {this.callbackFunction3}/>
                     </View>
                     <View style={styles.centerRowBot}>
-                      <TouchableOpacity>
+                      <TouchableOpacity disabled={true}>
                           <Image source={
                               require('../assets/images/seat_bot.png')
                               } style={styles.seatImg}/>
-                              <View style={{position: 'absolute',  top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
-                                  <Text>{this.state.self_nick}</Text>
-                              </View>
+                            <Text style={{textAlign:'center'}}>{this.state.self_nick}</Text>
                       </TouchableOpacity>
                     </View>
-
                 </View>
                 <View>
                     <TouchableOpacity
-                        style={ styles.buttonstart}
+                        disabled={this.state.Isbuttonenable ? false : true} style={this.state.Isbuttonenable ?
+                            styles.buttonstart :styles.buttonstartDisable
+                            }  
                         title = "INICIAR PARTIDA"
                         onPress={ () => this.props.navigation.navigate('Game')}>
 
@@ -105,6 +121,12 @@ export default class Lobby extends Component {
     }
 }
 const styles = StyleSheet.create({
+    buttonstartDisable:{
+        backgroundColor:'gray',
+        marginTop: hp('3%'),
+        fontWeight:'bold',
+        padding: hp('2%'),
+    },
     textstart:{
 		fontSize:hp('4%'),
 		color: 'white',
