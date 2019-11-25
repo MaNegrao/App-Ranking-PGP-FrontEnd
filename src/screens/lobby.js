@@ -6,9 +6,37 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import Search from '../components/searchPlayers'
 
 export default class Lobby extends Component {
+    constructor() {
+        super();
+        this.state = {
+            imagens:[require('../assets/images/seat_top.png'),require("../assets/images/seat_left.png"),require("../assets/images/seat_right.png")],
+            self_nick: '',
+            partner_nick: '',
+            left_adversary_nick: '',
+            right_adversary_nick: '',
+            count: 0
+        }
+    }
+
+    callbackFunction = async (childData) =>{
+        this.setState({partner_nick : childData})
+        await this.setState({count: this.state.count + 1})
+        this.handledisableenable()
+    }
+    callbackFunction2 = async (childData) =>{
+        this.setState({left_adversary_nick : childData})
+        await this.setState({count: this.state.count + 1})
+        this.handledisableenable()
+    }
+    callbackFunction3 = async (childData) =>{
+        this.setState({right_adversary_nick : childData})
+        await this.setState({count: this.state.count + 1})
+        this.handledisableenable()
+
+    }
     handledisableenable()
         {
-           if(1)
+           if(this.state.count == 3)
             {
                 this.setState({ Isbuttonenable : true });
             }
@@ -21,9 +49,16 @@ export default class Lobby extends Component {
       await AsyncStorage.clear();
       this.props.navigation.navigate('Auth');
     };
+
+    componentWillMount(){
+      AsyncStorage.getItem("nick").then((value) => {
+          this.setState({"self_nick": value});
+      });
+    }
+
     _signProgressMatch = async () => {
         this.props.navigation.navigate('Progress');
-      };    
+      };
     render(){
         return(
             <View style={styles.container}>
@@ -53,26 +88,35 @@ export default class Lobby extends Component {
                 </View>
                 <View style={styles.gameTable}>
                     <View style={styles.centerRowTop}>
-                        <Search/>
+                        <Search parentCallback = {this.callbackFunction}/>
                     </View>
                     <View style={styles.centerRow}>
-                        <Search/>
+                        <Search parentCallback = {this.callbackFunction2}/>
                         <Image source={
                             require('../assets/images/table.png')
                         } style={styles.table}/>
-                        <Search/>
+                        <Search parentCallback = {this.callbackFunction3}/>
                     </View>
                     <View style={styles.centerRowBot}>
-                        <Search/>
+                      <TouchableOpacity disabled={true}>
+                          <Image source={
+                              require('../assets/images/seat_bot.png')
+                              } style={styles.seatImg}/>
+                            <Text style={{textAlign:'center'}}>{this.state.self_nick}</Text>
+                      </TouchableOpacity>
                     </View>
-
                 </View>
                 <View>
-                    <TouchableOpacity 
-                        style={ styles.buttonstart} 
+                    <TouchableOpacity
+                        disabled={this.state.Isbuttonenable ? false : true} style={this.state.Isbuttonenable ?
+                            styles.buttonstart :styles.buttonstartDisable
+                            }  
                         title = "INICIAR PARTIDA"
-                        onPress={ () => this.props.navigation.navigate('Game')}>
-                        
+                        onPress={ () => this.props.navigation.navigate('Game', {
+                            t1: [this.state.self_nick , this.state.partner_nick],
+                            t2: [this.state.left_adversary_nick, this.state.right_adversary_nick],
+                        })}>
+
                         <Text style = {styles.textstart}>INICIAR PARTIDA</Text>
                     </TouchableOpacity>
                 </View>
@@ -81,6 +125,12 @@ export default class Lobby extends Component {
     }
 }
 const styles = StyleSheet.create({
+    buttonstartDisable:{
+        backgroundColor:'gray',
+        marginTop: hp('3%'),
+        fontWeight:'bold',
+        padding: hp('2%'),
+    },
     textstart:{
 		fontSize:hp('4%'),
 		color: 'white',
@@ -88,6 +138,11 @@ const styles = StyleSheet.create({
 	},
     container: {
         flex:1
+    },
+    seatImg: {
+        width: 100,
+        height: 100,
+        resizeMode: 'contain'
     },
     buttonstart:{
         backgroundColor:'black',

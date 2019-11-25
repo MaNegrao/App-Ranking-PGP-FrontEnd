@@ -4,19 +4,27 @@ import Counter from '../components/Counter';
 
 export default class Game extends Component {
 
-	constructor() {
-    super();
-    this.state = {
-        score_t1: 0,
-        score_t2: 0,
-    }
+    state = {
+      t1: {
+        players: [],
+        score: 0,
+      },
+      t2: {
+        players: [],
+        score: 0,
+      },
+  };
+  componentWillMount(){
+    const { navigation } = this.props;
+    this.state.t1.players = navigation.getParam('t1');
+    this.state.t2.players = navigation.getParam('t2');
   }
   
   verifica() {
-    if(this.state.score_t1 == 12) {
+    if(this.state.t1.score == 12) {
       alert('Time 1 Ganhou!!!');
     }
-    else if(this.state.score_t2 == 12) {
+    else if(this.state.t2.score == 12) {
       alert('Time 2 Ganhou!!!');
     }
   }
@@ -24,11 +32,11 @@ export default class Game extends Component {
   handleIncrement = (counter) => {
     if(counter == 't1'){
       this.setState({
-        score_t1: this.state.score_t1 + 1 < 12 ? this.state.score_t1 + 1 : 12
+        score_t1: this.state.t1.score + 1 < 12 ? this.state.t1.score + 1 : 12
       });  
     } else {
       this.setState({
-        score_t2: this.state.score_t2 + 1 < 12 ? this.state.score_t2 + 1 : 12
+        score_t2: this.state.t1.score + 1 < 12 ? this.state.t2.score + 1 : 12
       });
     }
     this.verifica();
@@ -37,11 +45,11 @@ export default class Game extends Component {
   handleDecrement = (counter) => {
     if(counter == 't1'){
       this.setState({
-        score_t1: this.state.score_t1 == 0 ? 0 : this.state.score_t1 - 1
+        score_t1: this.state.t1.score == 0 ? 0 : this.state.t1.score - 1
       });  
     } else {
       this.setState({
-        score_t2: this.state.score_t2 == 0 ? 0 : this.state.score_t2 - 1
+        score_t2: this.state.t2.score == 0 ? 0 : this.state.t2.score - 1
       });
     }
     console.log(this.state);
@@ -53,20 +61,20 @@ export default class Game extends Component {
         <View style={styles.headerContainer}>
           <View>
             <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
-            <Text>Usuario um</Text>
+            <Text>{this.state.t1.players[0]}</Text>
           </View>
           <View>
             <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
-            <Text>Usuario Dois</Text>
+            <Text>{this.state.t1.players[1]}</Text>
           </View>
           <Image source={require('../assets/images/miniicon.png')} style={styles.headerImage}/>
           <View>
             <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
-            <Text>Usuario um</Text>
+            <Text>{this.state.t2.players[0]}</Text>
           </View>
           <View>
             <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
-            <Text>Usuario Dois</Text>
+            <Text>{this.state.t2.players[1]}</Text>
           </View>
         </View>
         <View style={styles.counterContainer}>
