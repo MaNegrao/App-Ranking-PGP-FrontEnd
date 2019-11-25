@@ -1,35 +1,51 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
 import Counter from '../components/Counter';
 
-export default function LinksScreen() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <View>
-          <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
-          <Text>Usuario um</Text>
+export default class LinksScreen extends Component {
+
+  state = {
+      t1: {
+        players: [],
+      },
+      t2: {
+        players: [],
+      },
+  };
+  componentWillMount(){
+    const { navigation } = this.props;
+    this.state.t1.players = navigation.getParam('t1');
+    this.state.t2.players = navigation.getParam('t2');
+  }
+  render(){
+    return (
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <View>
+            <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
+            <Text>{this.state.t1.players[0]}</Text>
+          </View>
+          <View>
+            <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
+            <Text>{this.state.t1.players[1]}</Text>
+          </View>
+          <Image source={require('../assets/images/miniicon.png')} style={styles.headerImage}/>
+          <View>
+            <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
+            <Text>{this.state.t2.players[0]}</Text>
+          </View>
+          <View>
+            <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
+            <Text>{this.state.t2.players[1]}</Text>
+          </View>
         </View>
-        <View>
-          <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
-          <Text>Usuario Dois</Text>
-        </View>
-        <Image source={require('../assets/images/miniicon.png')} style={styles.headerImage}/>
-        <View>
-          <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
-          <Text>Usuario um</Text>
-        </View>
-        <View>
-          <Image source={require('../assets/images/miniicon.png')} style={styles.profileImage}/>
-          <Text>Usuario Dois</Text>
-        </View>
+        <View style={styles.counterContainer}>
+          <Counter />
+          <Counter />
+        </View>  
       </View>
-      <View style={styles.counterContainer}>
-        <Counter />
-        <Counter />
-      </View>  
-    </View>
-  );
+    )
+  }
 }
 
 const styles = StyleSheet.create({
