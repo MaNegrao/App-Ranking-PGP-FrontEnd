@@ -21,23 +21,34 @@ export default class Lobby extends Component {
       await AsyncStorage.clear();
       this.props.navigation.navigate('Auth');
     };
+    _signProgressMatch = async () => {
+        this.props.navigation.navigate('Progress');
+      };    
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.leftTop}>
                     <View  style={styles.out}>
-                    <TouchableOpacity
-                            onPress={this._signOutAsync}
-                        >
-                            <Image source={
-                            require('../assets/images/back.png')
-                            } style={styles.signout}/>
+                        <TouchableOpacity
+                                onPress={this._signOutAsync}
+                            >
+                                <Image source={
+                                require('../assets/images/back.png')
+                                } style={styles.signout}/>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.out1}>
                         <Image source={
                                 require('../assets/images/miniicon.png')
                                 } style={styles.icone}/>
+                    </View>
+                    <View style={styles.out2}>
+                        <TouchableOpacity
+                                onPress={this._signProgressMatch}>
+                                <Image source={
+                                require('../assets/images/progress.png')
+                                } style={styles.progress}/>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.gameTable}>
@@ -57,14 +68,13 @@ export default class Lobby extends Component {
 
                 </View>
                 <View>
-                    {/* disabled={this.state.Isbuttonenable ? false : true} style={this.state.Isbuttonenable ?
-                                    styles.buttonstart :
-                                    {opacity: 0.1}} */}
-                <TouchableOpacity 
-								style={
-                                    styles.buttonstart
-                                    } title = "INICIAR PARTIDA"
-							><Text style = {styles.textstart}>INICIAR PARTIDA</Text></TouchableOpacity>
+                    <TouchableOpacity 
+                        style={ styles.buttonstart} 
+                        title = "INICIAR PARTIDA"
+                        onPress={ () => this.props.navigation.navigate('Game')}>
+                        
+                        <Text style = {styles.textstart}>INICIAR PARTIDA</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
@@ -102,6 +112,11 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         paddingLeft: 105,
     },
+    out2:{
+        alignSelf: 'flex-end',
+        paddingLeft: 55,
+        paddingBottom: 70,
+    },
     icone:{
         width: 100,
         height: 100,
@@ -109,6 +124,10 @@ const styles = StyleSheet.create({
     signout:{
         width: 40,
         height: 40,
+    },
+    progress:{
+        width: 70,
+        height: 70,
     },
     lt:{
         overflow:'hidden'
