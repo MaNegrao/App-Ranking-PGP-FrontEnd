@@ -13,21 +13,30 @@ export default class Login extends Component {
         this.state = {
             email: '',
             password: '',
+						error: false
         }
 	}
 
 	loginSubmit = async () => {
-      const response = await api.post('/authenticate', this.state);
-			console.log(response.data);
-			AsyncStorage.setItem('userToken', response.data.token);
-			AsyncStorage.setItem('email', response.data.player.email);
-			AsyncStorage.setItem('id', response.data.player.id);
-			AsyncStorage.setItem('name', response.data.player.name);
-			AsyncStorage.setItem('nick', response.data.player.nick);
-			this.props.navigation.navigate('App');
+			this.state.error = false;
+			this.forceUpdate()
+      await api.post('/authenticate', this.state
+			).then((response) => {
+					AsyncStorage.setItem('userToken', response.data.token);
+					AsyncStorage.setItem('email', response.data.player.email);
+					AsyncStorage.setItem('id', response.data.player.id);
+					AsyncStorage.setItem('name', response.data.player.name);
+					AsyncStorage.setItem('nick', response.data.player.nick);
+					this.props.navigation.navigate('App');
+			}).catch((error) => {
+					this.state.error = true;
+					this.forceUpdate();
+			});
 	}
 
 	render () {
+		const errorMessage = <Text style= {styles.errorMessage} >Usuário ou senha invalidos!</Text>;
+		const nothing = <Text></Text>
 		return(
             <SafeAreaView style={styles.container}>
 				<KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
@@ -53,6 +62,9 @@ export default class Login extends Component {
 								placeholder='Senha'
 								secureTextEntry
 							/>
+						</View>
+						<View>
+							{this.state.error? errorMessage : nothing}
 						</View>
 						<View>
 							<TouchableOpacity
@@ -91,6 +103,10 @@ const styles = StyleSheet.create({
 		borderRadius: 0,
 		borderBottomWidth: 2,
 		borderColor: 'black',
+	},
+	errorMessage:{
+		alignSelf: 'center',
+		color : 'red'
 	},
 	container: {
 		margin: 20,
