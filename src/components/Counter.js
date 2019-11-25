@@ -9,14 +9,16 @@ class Counter extends Component {
 
   handleIncrement = () => {
     this.setState({
-      count: this.state.count == 11 ? 0 : this.state.count + 1
+      count: (this.state.count + 1) < 12 ? this.state.count + 1 : 12
     });
+    this.props.functionHandleIncrement(this.props.name);
   }
 
   handleDecrement = () => {
     this.setState({
       count: this.state.count == 0 ? 0 : this.state.count - 1
     });
+    this.props.functionHandleDecrement(this.props.name);
   }
 
   render(){
@@ -33,7 +35,6 @@ class Counter extends Component {
       </View>
     )
   }
-
 }
 
 const styles = StyleSheet.create({

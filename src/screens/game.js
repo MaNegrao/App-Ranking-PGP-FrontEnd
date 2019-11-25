@@ -1,15 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component }  from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
 import Counter from '../components/Counter';
 
-export default class LinksScreen extends Component {
+export default class Game extends Component {
 
-  state = {
+    state = {
       t1: {
         players: [],
+        score: 0,
       },
       t2: {
         players: [],
+        score: 0,
       },
   };
   componentWillMount(){
@@ -17,6 +19,42 @@ export default class LinksScreen extends Component {
     this.state.t1.players = navigation.getParam('t1');
     this.state.t2.players = navigation.getParam('t2');
   }
+  
+  verifica() {
+    if(this.state.t1.score == 12) {
+      alert('Time 1 Ganhou!!!');
+    }
+    else if(this.state.t2.score == 12) {
+      alert('Time 2 Ganhou!!!');
+    }
+  }
+
+  handleIncrement = (counter) => {
+    if(counter == 't1'){
+      this.setState({
+        score_t1: this.state.t1.score + 1 < 12 ? this.state.t1.score + 1 : 12
+      });  
+    } else {
+      this.setState({
+        score_t2: this.state.t1.score + 1 < 12 ? this.state.t2.score + 1 : 12
+      });
+    }
+    this.verifica();
+  }
+  
+  handleDecrement = (counter) => {
+    if(counter == 't1'){
+      this.setState({
+        score_t1: this.state.t1.score == 0 ? 0 : this.state.t1.score - 1
+      });  
+    } else {
+      this.setState({
+        score_t2: this.state.t2.score == 0 ? 0 : this.state.t2.score - 1
+      });
+    }
+    console.log(this.state);
+  }
+
   render(){
     return (
       <View style={styles.container}>
@@ -40,8 +78,8 @@ export default class LinksScreen extends Component {
           </View>
         </View>
         <View style={styles.counterContainer}>
-          <Counter />
-          <Counter />
+          <Counter name='t1' functionHandleIncrement={this.handleIncrement} functionHandleDecrement={this.handleDecrement} />
+          <Counter name='t2' functionHandleIncrement={this.handleIncrement} functionHandleDecrement={this.handleDecrement} />
         </View>  
       </View>
     )
