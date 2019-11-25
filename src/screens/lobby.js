@@ -31,27 +31,14 @@ export default class Lobby extends Component {
       await AsyncStorage.clear();
       this.props.navigation.navigate('Auth');
     };
-    get_nick = async () => {
-      const token = await AsyncStorage.getItem('nick');
-      return token;
-    }
+
     componentWillMount(){
       AsyncStorage.getItem("nick").then((value) => {
           this.setState({"self_nick": value});
-      })
-      .then(res => {
-
       });
     }
     render(){
-        if(!this.state.self_nick){
-          return(
-            <View>
-              <Text>Loading</Text>
-            </View>
-          )
-        }else{
-          return(
+            return(
               <View style={styles.container}>
                   <View style={styles.leftTop}>
                       <View  style={styles.out}>
@@ -104,7 +91,6 @@ export default class Lobby extends Component {
                   </View>
               </View>
           )
-        }
     }
 }
 const styles = StyleSheet.create({

@@ -60,7 +60,6 @@ export default class Register extends Component {
             AsyncStorage.setItem('id', this.state.id);
             AsyncStorage.setItem('name', this.state.name);
             AsyncStorage.setItem('nick', this.state.nick);
-            AsyncStorage.setItem('pic_path', this.state.wins);
     		this.props.navigation.navigate('App');
         }
     }

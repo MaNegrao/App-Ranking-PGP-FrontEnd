@@ -24,7 +24,6 @@ export default class Login extends Component {
 			AsyncStorage.setItem('id', response.data.player.id);
 			AsyncStorage.setItem('name', response.data.player.name);
 			AsyncStorage.setItem('nick', response.data.player.nick);
-			AsyncStorage.setItem('pic_path', response.data.player.wins);
 			this.props.navigation.navigate('App');
 	}
 
