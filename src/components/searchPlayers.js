@@ -74,18 +74,7 @@ class Search extends React.Component {
 )
 
   render() {
-    const getCircularReplacer = () => {
-        const seen = new WeakSet();
-        return (key, value) => {
-          if (typeof value === "object" && value !== null) {
-            if (seen.has(value)) {
-              return;
-            }
-            seen.add(value);
-          }
-          return value;
-        };
-      };
+    const image = this.props.imagem;
     const {player} = this.state;
     return (
       <View style={styles.container}>
@@ -127,7 +116,7 @@ class Search extends React.Component {
             onPress={() => {this.onSeatPress(true);}
             }>
             <Image source={
-                require('../assets/images/seat_bot.png')
+                image
                 } style={styles.seatImg}/>
             </TouchableOpacity>
         <Text>{player}</Text>

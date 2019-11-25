@@ -88,14 +88,14 @@ export default class Lobby extends Component {
                 </View>
                 <View style={styles.gameTable}>
                     <View style={styles.centerRowTop}>
-                        <Search parentCallback = {this.callbackFunction}/>
+                        <Search imagem={this.state.imagens[0]} parentCallback = {this.callbackFunction}/>
                     </View>
                     <View style={styles.centerRow}>
-                        <Search parentCallback = {this.callbackFunction2}/>
+                        <Search imagem={this.state.imagens[1]} parentCallback = {this.callbackFunction2}/>
                         <Image source={
                             require('../assets/images/table.png')
                         } style={styles.table}/>
-                        <Search parentCallback = {this.callbackFunction3}/>
+                        <Search imagem={this.state.imagens[2]} parentCallback = {this.callbackFunction3}/>
                     </View>
                     <View style={styles.centerRowBot}>
                       <TouchableOpacity disabled={true}>
