@@ -59,12 +59,11 @@ export default class Register extends Component {
 			this.forceUpdate()
             const response = await api.post('/players', this.state
                 ).then((response) => {
-                    AsyncStorage.setItem('userToken', response.data.token);
                     AsyncStorage.setItem('email', this.state.email);
                     AsyncStorage.setItem('id', this.state.id);
                     AsyncStorage.setItem('name', this.state.name);
                     AsyncStorage.setItem('nick', this.state.nick);
-            		this.props.navigation.navigate('App');
+            		this.props.navigation.navigate('Login');
                 }).catch((error) => {
                     this.state.error = true;
 					this.forceUpdate();
@@ -73,7 +72,7 @@ export default class Register extends Component {
     }
 
     render () {
-        const errorMessage = <Text style= {styles.errorMessage} >Usuário e/ou senha já em uso!</Text>;
+        const errorMessage = <Text style= {styles.errorMessage} >Usuário e/ou email já em uso!</Text>;
 		const nothing = <Text></Text>
         return(
             <SafeAreaView style={styles.container}>
