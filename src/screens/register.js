@@ -18,6 +18,7 @@ export default class Register extends Component {
             checkPassword: '',
             pic: '',
             wins: 0,
+            error: false,
         }
     }
 
@@ -54,17 +55,26 @@ export default class Register extends Component {
         if (this.validate(ts.name, ts.nick, ts.email, ts.password, ts.checkPassword) == false)
             console.log("Erro")
         else{
-            const response = await api.post('/players', this.state);
-            AsyncStorage.setItem('userToken', response.data.token);
-            AsyncStorage.setItem('email', this.state.email);
-            AsyncStorage.setItem('id', this.state.id);
-            AsyncStorage.setItem('name', this.state.name);
-            AsyncStorage.setItem('nick', this.state.nick);
-    		this.props.navigation.navigate('App');
+            this.state.error = false;
+			this.forceUpdate()
+            const response = await api.post('/players', this.state
+                ).then((response) => {
+                    AsyncStorage.setItem('userToken', response.data.token);
+                    AsyncStorage.setItem('email', this.state.email);
+                    AsyncStorage.setItem('id', this.state.id);
+                    AsyncStorage.setItem('name', this.state.name);
+                    AsyncStorage.setItem('nick', this.state.nick);
+            		this.props.navigation.navigate('App');
+                }).catch((error) => {
+                    this.state.error = true;
+					this.forceUpdate();
+                });
         }
     }
 
     render () {
+        const errorMessage = <Text style= {styles.errorMessage} >Usuário e/ou senha já em uso!</Text>;
+		const nothing = <Text></Text>
         return(
             <SafeAreaView style={styles.container}>
                 <KeyboardAvoidingView behavior="padding" enabled>
@@ -126,7 +136,9 @@ export default class Register extends Component {
                         </View>
 
                         {/* <ImagePicker style = {styles.button}/> */}
-
+                        <View>
+							{this.state.error? errorMessage : nothing}
+						</View>
                         <View>
                             <TouchableOpacity
                                     title="Register"
@@ -163,7 +175,10 @@ const styles = StyleSheet.create({
 		height: hp('80%'),
         width: wp('90%')
     },
-
+    errorMessage:{
+        alignSelf: 'center',
+        color : 'red'
+    },
     header: {
         marginTop: 30,
         flexDirection: 'column',

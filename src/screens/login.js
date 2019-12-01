@@ -35,7 +35,7 @@ export default class Login extends Component {
 	}
 
 	render () {
-		const errorMessage = <Text style= {styles.errorMessage} >Usuário ou senha invalidos!</Text>;
+		const errorMessage = <Text style= {styles.errorMessage} >Usuário e/ou senha incorretos!</Text>;
 		const nothing = <Text></Text>
 		return(
             <SafeAreaView style={styles.container}>
