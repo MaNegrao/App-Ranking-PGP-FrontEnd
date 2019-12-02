@@ -8,7 +8,8 @@ import {
   Image,
   TouchableOpacity,
   View,
-  FlatList
+  FlatList,
+  Button
 } from 'react-native';
 import Constants from 'expo-constants';
 import api from '../services/api';
@@ -16,20 +17,27 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 
 export default class Ranking extends Component {
-  
   state = {
     users: [],
+    count: 0
   };
   componentWillMount = async () => {
     await api.get('/ranking').then((response) => {
       this.setState({
-        users: response.data
+        users: response.data,
+        count: this.state.count+1
       })
-      console.log(this.state.users)
     });
   }
+  refreshList = async () =>{
+    await api.get('/ranking').then((response) => {
+      this.setState({
+        users: response.data,
+        count: this.state.count+1
+      })
+    });
 
-
+  }
 
   renderItem = ({item}) => (
   <View style = {styles.lt}>
@@ -42,7 +50,6 @@ export default class Ranking extends Component {
               <Text style = {styles.rk}>  (Vitórias: {item.wins})</Text>
               <TouchableOpacity
                           value = {item.nick}
-                          onPress={(nick) => this.handleClick(item.nick)}
                           title="Login"
                           style={styles.button}>
                       <Text style = {styles.text}>+</Text>
@@ -59,6 +66,11 @@ textAlign:'center',
 fontWeight:'bold',
 padding:20
 }}>RANKING</Text>
+          <TouchableOpacity style={{padding: 20}}onPress={() => this.refreshList()} >
+          <Image source={
+                          require('../assets/icon2.png')
+                          } style={{width:50,height:50,alignSelf:'center'}}/>
+          </TouchableOpacity>
           <ScrollView>
           <FlatList
                         data={this.state.users}
