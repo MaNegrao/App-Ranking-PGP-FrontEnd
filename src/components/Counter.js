@@ -7,18 +7,23 @@ class Counter extends Component {
     count: 0
   }
 
-  handleIncrement = () => {
-    this.setState({
-      count: (this.state.count + 1) < 12 ? this.state.count + 1 : 12
+  handleIncrement = async () => {
+    await this.setState({
+      count: (this.state.count + 1) < 12 ? (this.state.count + 1) : 12
     });
-    this.props.functionHandleIncrement(this.props.name);
+    
+    await this.props.functionSetScore(this.props.team, this.state.count, this.state.count == 12 ? 1 : 0);
+
+    if(this.state.count == 12)
+      this.props.functionEndGame();
   }
 
-  handleDecrement = () => {
-    this.setState({
+  handleDecrement = async () => {
+    await this.setState({
       count: this.state.count == 0 ? 0 : this.state.count - 1
     });
-    this.props.functionHandleDecrement(this.props.name);
+
+    await this.props.functionSetScore(this.props.team, this.state.count, this.state.count == 12 ? 1 : 0);
   }
 
   render(){
