@@ -5,10 +5,11 @@ import LobbyScreen from './screens/lobby';
 import ProgressScreen from './screens/progress';
 import AuthLoadingScreen from './screens/auth';
 import GameScreen from './screens/game';
+import RankingScreen from './screens/ranking';
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-const AppStack = createStackNavigator({Lobby: LobbyScreen, Game: GameScreen, Progress: ProgressScreen}, { headerMode: 'none'});
+const AppStack = createStackNavigator({Lobby: LobbyScreen, Game: GameScreen, Progress: ProgressScreen, Ranking: RankingScreen}, { headerMode: 'none'});
 const AuthStack = createStackNavigator({Login: LoginScreen, Register: RegisterScreen}, { headerMode: 'none'});
 const AppNavigator = createSwitchNavigator (
   {

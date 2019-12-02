@@ -48,12 +48,6 @@ export default class Ranking extends Component {
               <Text style = {styles.nick}>{item.nick}</Text>
               <Text style = {styles.rk}>  (Ranking: {item.ranking}º)</Text>
               <Text style = {styles.rk}>  (Vitórias: {item.wins})</Text>
-              <TouchableOpacity
-                          value = {item.nick}
-                          title="Login"
-                          style={styles.button}>
-                      <Text style = {styles.text}>+</Text>
-              </TouchableOpacity>
           </View>
    </View>
 )

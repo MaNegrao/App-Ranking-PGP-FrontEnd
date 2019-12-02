@@ -57,7 +57,7 @@ export default class Lobby extends Component {
     }
 
     _signProgressMatch = async () => {
-        this.props.navigation.navigate('Progress');
+        this.props.navigation.navigate('Ranking');
       };
     render(){
         return(
